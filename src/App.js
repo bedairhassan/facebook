@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom';
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
     </div>
   );
 }
+//https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
 
 function Login() {
 
@@ -39,19 +41,35 @@ function Login() {
     isLoginset(!isLogin)
   }
 
+
   return (
     <React.Fragment>
       <h1>Login Page</h1>
       <input type="checkbox" onChange={()=>loginAction()}/>
       {isLogin===true?`logged in `:`NOT`}
+
+      CREATE/BAKE COOKIE
+      <button onClick={()=>{bake_cookie(`performance`,100)}}>Submit 100 performance</button>
+
     </React.Fragment>
 
   )
 }
 
 function People() {
+
+  const [cookie,cookieset]=useState(`cookie not loaded`)
+  
+  useEffect(()=>{
+    cookieset(read_cookie(`performance`))
+  },[])
+
   return (
-    <h1>People</h1>
+    <React.Fragment>
+          <h1>People</h1>
+          READ COOKIE
+          {cookie}
+    </React.Fragment>
   )
 }
 
