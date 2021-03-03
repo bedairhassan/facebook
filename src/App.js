@@ -3,6 +3,11 @@ import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-ro
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import './App.css';
 
+// reusable
+import Input from '../src/reusable-components/Input'
+import Button from '../src/reusable-components/Button'
+
+
 function App() {
   return (
     <div className="App">
@@ -36,39 +41,61 @@ function App() {
 function Login() {
 
   const [isLogin,isLoginset]=useState(false)
+  const [isLoginText,isLoginTextset]=useState(``)
 
-  function loginAction(){
-    isLoginset(!isLogin)
+  // users who have previously signed up successfully to website
+  const [availableUsers,availableUsersset]=useState([
+    {'username':'admin','password':'hassan'}
+  ])
+
+  // contains username and password
+  const [user,userset]=useState({}) // {} for object
+  // function for setting value `user`
+  function setuser(key,value){
+    const tmp = {...user}
+    tmp[key]=value
+    userset(tmp)
   }
 
+  // compares object {user} with availableUsers
+  function canISignIn(){
+
+    // returns array of all equal username and password
+    // expect 1 item in array because
+    // not two usernames shall be equal!
+    let searchForUsernameAndPassword
+    =availableUsers.filter(guest=>guest[`username`]===user[`username`]&&guest[`password`]===user[`password`])
+
+    if(searchForUsernameAndPassword.length>0){
+      isLoginset(true)
+    }else{
+      console.log(`no`)
+    }
+  }
+
+  useEffect(()=>{
+    isLoginTextset(`Signed In`)
+  },[isLogin])
 
   return (
     <React.Fragment>
-      <h1>Login Page</h1>
-      <input type="checkbox" onChange={()=>loginAction()}/>
-      {isLogin===true?`logged in `:`NOT`}
+      <h1>Sign In Page</h1>
 
-      CREATE/BAKE COOKIE
-      <button onClick={()=>{bake_cookie(`performance`,100)}}>Submit 100 performance</button>
+      <Input hint={`Enter username`} retrieveValue={username=>setuser(`username`,username)}/>
+      <Input hint={`Enter password`} retrieveValue={password=>setuser(`password`,password)}/>
+      <Button name={`Submit`} submit={()=>canISignIn()}/>
+      {isLoginText}
 
     </React.Fragment>
 
   )
 }
 
-function People() {
-
-  const [cookie,cookieset]=useState(`cookie not loaded`)
-  
-  useEffect(()=>{
-    cookieset(read_cookie(`performance`))
-  },[])
+function People() {  
 
   return (
     <React.Fragment>
           <h1>People</h1>
-          READ COOKIE
-          {cookie}
     </React.Fragment>
   )
 }
