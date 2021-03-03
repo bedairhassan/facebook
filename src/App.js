@@ -69,12 +69,18 @@ function Login() {
     if(searchForUsernameAndPassword.length>0){
       isLoginset(true)
     }else{
-      console.log(`no`)
+      isLoginset(false)
     }
   }
 
   useEffect(()=>{
-    isLoginTextset(`Signed In`)
+
+    if(isLogin){
+      isLoginTextset(`Signed In`)
+    }else{
+      isLoginTextset(`Not Signed In`)
+    }
+
   },[isLogin])
 
   return (
