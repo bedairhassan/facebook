@@ -10,7 +10,7 @@ import Button from '../src/reusable-components/Button'
 // components
 import CreatePost from './components/CreatePost'
 import Login from './components/Login'
-import About from './components/About'
+import About from './components/About/AboutMain'
 
 
 function App() {
