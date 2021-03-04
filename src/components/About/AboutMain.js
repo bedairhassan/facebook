@@ -5,10 +5,11 @@ import React, { useEffect, useState } from "react"
 import Editing from './Editing'
 import Plain from './Plain'
 
-
+// icons
 import editIconYES from '../../images/edit_32px_yes.png'
 import editIconNO from '../../images/edit_32px_no.png'
 
+// reusable 
 import DisplayIf from '../../reusable-components/DisplayIf'
 
 export default function About() {
@@ -17,11 +18,11 @@ export default function About() {
 
   const [user, userSet] = useState({}) // name, phone_adress, email_address
 
+  useEffect(()=>{},[user]) // always update to firebase
+
   return (
     <React.Fragment>
       <h1>About Page</h1>
-
-
 
       <DisplayIf
         yes={editIconYES}
@@ -29,10 +30,9 @@ export default function About() {
         Trigger={() => isEditingset(!isEditing)}
         condition={isEditing} />
 
+      {isEditing && <Editing retrieveValue={userGuest=>userSet({...user,userGuest})}/>} 
+      {!isEditing && <Plain user={user} />}
 
-
-
-      {isEditing ? <Editing /> : <Plain user={user} />}
     </React.Fragment>
   )
 }
