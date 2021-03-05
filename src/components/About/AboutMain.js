@@ -14,9 +14,9 @@ import DisplayIf from '../../reusable-components/DisplayIf'
 
 export default function About() {
 
-  const [isEditing, isEditingset] = useState(false)
+  const [isEditing, isEditingset] = useState(true)
 
-  const [user, userSet] = useState({}) // name, phone_adress, email_address
+  const [user, userSet] = useState({}) // name, phone,email
 
   useEffect(()=>{},[user]) // always update to firebase
 
