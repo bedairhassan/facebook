@@ -16,10 +16,6 @@ export default function About() {
 
   const [isEditing, isEditingset] = useState(true)
 
-  const [user, userSet] = useState({}) // name, phone,email
-
-  useEffect(()=>{},[user]) // always update to firebase
-
   return (
     <React.Fragment>
       <h1>About Page</h1>
@@ -30,8 +26,8 @@ export default function About() {
         Trigger={() => isEditingset(!isEditing)}
         condition={isEditing} />
 
-      {isEditing && <Editing retrieveValue={userGuest=>userSet({...user,userGuest})}/>} 
-      {!isEditing && <Plain user={user} />}
+      {isEditing && <Editing />}
+      {!isEditing && <Plain />}
 
     </React.Fragment>
   )

@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react/cjs/react.development';
 
 const validator = require(`validator`)
 
-const Editing = ({ retrieveValue }) => {
+const Editing = () => {
 
-    const [user, userSet] = useState({}) // object // name, phone, email address
+
+    const [user, userSet] = useState({})
 
     function easySet(attribute, value) {
 
@@ -15,7 +16,7 @@ const Editing = ({ retrieveValue }) => {
     }
 
     useEffect(() => {
-        retrieveValue(user)
+        // update to firebase
     }, [user])
 
     return (
@@ -24,7 +25,8 @@ const Editing = ({ retrieveValue }) => {
                 <tr>
                     <td>Name</td>
                     <td>
-                        <input onChange={e => {
+                        <input 
+                        onChange={e => {
 
                             let value = e.target.value
                             let condition = validator.isAlpha(value)
@@ -69,7 +71,7 @@ const Editing = ({ retrieveValue }) => {
                             let value = e.target.value
                             let condition = validator.isEmail(value)
 
-                            if(value.split(`.com `).length>=2){ // any characters after .com shall be ignored // I added a space because it worked ! 
+                            if (value.split(`.com `).length >= 2) { // any characters after .com shall be ignored // I added a space because it worked ! 
                                 return;
                             }
 
@@ -84,6 +86,7 @@ const Editing = ({ retrieveValue }) => {
                         }} />
                     </td>
                 </tr>
+                <br/>
                 <tr>
                     <td>So far, your accepted values are</td>
                 </tr>
