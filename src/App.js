@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // reusable
 import Input from '../src/reusable-components/Input'
@@ -17,6 +19,17 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <button class="btn btn-danger">submit</button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      </ul>
+      </div>
+
+
         <li>
           <Link to="/login">Login</Link>
         </li>
