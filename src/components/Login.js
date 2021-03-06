@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import Input from '../reusable-components/Input'
 import Button from '../reusable-components/Button'
+import { bake_cookie } from "sfcookies"
 
 export default function Login() {
 
@@ -32,6 +33,7 @@ export default function Login() {
         = availableUsers.filter(guest => guest[`username`] === user[`username`] && guest[`password`] === user[`password`])
   
       if (searchForUsernameAndPassword.length > 0) {
+        bake_cookie(`currentUser`,user[`username`])
         isLoginset(true)
       } else {
         isLoginset(false)

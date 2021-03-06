@@ -56,7 +56,16 @@ function App() {
         <Link to="/CreateNews" class="nav-item nav-link px-3">Create News</Link>
         |
         <Link to="/News" class="nav-item nav-link px-3">News</Link>
-        <a class="nav-link disabled" href="#"> {signInStatus}</a>
+          <a class="nav-link disabled" href="#"> {signInStatus}</a>
+
+          <a class="nav-link" href="#"> <button class="btn btn-danger"
+          
+          onClick={()=>{
+            bake_cookie(`currentUser`,'')
+          }}
+          >Sign Out</button></a>
+
+
         </nav>
 
         <Switch>
