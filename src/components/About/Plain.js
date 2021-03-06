@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect,useState } from 'react/cjs/react.development';
+import Table from './Table'
 
 const Plain = () => {
 
@@ -13,20 +14,8 @@ const Plain = () => {
 
     return (
         <div>
-            <table>
-                <tr>
-                    <td>Name</td>
-                    <td>{user.name}</td>
-                </tr>
-                <tr>
-                    <td>Phone</td>
-                    <td>{user.phone}</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>{user.email}</td>
-                </tr>
-            </table>
+            {/* user is always guaranteed a non-empty object */}
+            <Table user={user}/>
         </div>
     );
 };
