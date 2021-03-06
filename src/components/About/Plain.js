@@ -3,7 +3,7 @@ import { useEffect,useState } from 'react/cjs/react.development';
 
 const Plain = () => {
 
-    const [user, userSet] = useState() // name, phone,email
+    const [user, userSet] = useState({}) // name, phone,email
 
     useEffect(()=>{
 
