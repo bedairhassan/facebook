@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect,useState } from 'react/cjs/react.development';
-import Table from './Table'
+import Table from '../../reusable-components/Table'
 
 const Plain = () => {
 

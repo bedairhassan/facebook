@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 // reusable
-import Table from './About/Table'
+import Table from '../reusable-components/Table'
 
 const User = () => {
 

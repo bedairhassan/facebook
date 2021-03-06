@@ -11,10 +11,10 @@ import Button from '../src/reusable-components/Button'
 
 // components
 import CreatePost from './components/CreateNews'
-import Login from './components/Login'
+import Login from './components/LoggingIn/Login'
 import About from './components/About/AboutMain'
 import News from './components/News/NewsMain'
-import Table from './components/About/Table'
+import Table from './reusable-components/Table'
 import User from './components/User'
 
 // cookies
