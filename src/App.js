@@ -13,33 +13,31 @@ import Button from '../src/reusable-components/Button'
 import CreatePost from './components/CreatePost'
 import Login from './components/Login'
 import About from './components/About/AboutMain'
+import News from './components/News/NewsMain'
 
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <button class="btn btn-danger">submit</button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      </ul>
-      </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <Link to="/login" class="nav-item nav-link px-3">Login</Link>
+        |
+        <Link to="/About" class="nav-item nav-link px-3">About</Link>
+        |
+        <Link to="/CreateNews" class="nav-item nav-link px-3">Create News</Link>
+        |
+        <Link to="/News" class="nav-item nav-link px-3">News</Link>
+
+        </nav>
 
 
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/About">About</Link>
-        </li>
-        <li>
-          <Link to="/CreateNews">Create News</Link>
-        </li>
         <Switch>
+        <Route exact path="/News">
+            <News />
+          </Route>
+
           <Route exact path="/login">
             <Login />
           </Route>
