@@ -5,7 +5,7 @@ import RowCell from '../reusable-components/RowCell'
 import Input from '../reusable-components/Input'
 
 
-export default function CreatePost() {
+export default function CreatePost() { // type,text
 
     // 'type':'announcement',``
     // 'type':'post',`text`:`How is everyone?`
