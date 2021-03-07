@@ -5,6 +5,8 @@ import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 import firebase from '../../firebase/firebase'
 
+
+
 const validator = require(`validator`)
 
 const Editing = () => {
@@ -20,8 +22,11 @@ const Editing = () => {
 
     useEffect(() => {
         // update to firebase
-        let user = read_cookie(`currentUser`)
-        // firebase.database("https://test-server-875a8-default-rtdb.firebaseio.com").ref("/about")
+        firebase
+        // .database("https://test-server-875a8-default-rtdb.firebaseio.com")
+        .database()
+        .ref("/about")
+        .push({...user,'user': read_cookie(`currentUser`)})
 
     }, [user])
 
@@ -31,21 +36,21 @@ const Editing = () => {
                 <tr>
                     <td>Name</td>
                     <td>
-                        <input 
-                        onChange={e => {
+                        <input
+                            onChange={e => {
 
-                            let value = e.target.value
-                            let condition = validator.isAlpha(value)
+                                let value = e.target.value
+                                let condition = validator.isAlpha(value)
 
-                            if (value.length > 10) {
-                                return;
-                            }
+                                if (value.length > 10) {
+                                    return;
+                                }
 
-                            if (condition) {
-                                easySet(`name`, value)
-                            }
+                                if (condition) {
+                                    easySet(`name`, value)
+                                }
 
-                        }} />
+                            }} />
                     </td>
                 </tr>
                 <tr>
@@ -92,7 +97,7 @@ const Editing = () => {
                         }} />
                     </td>
                 </tr>
-                <br/>
+                <br />
                 <tr>
                     <td>So far, your accepted values are</td>
                 </tr>
