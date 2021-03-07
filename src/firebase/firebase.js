@@ -1,9 +1,5 @@
-// import {firebase} from "firebase"
-var firebase = require('firebase/app');
-require('firebase/auth');
-require('firebase/database');
-
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
     apiKey: "AIzaSyB9WGsbghOWP-rBYqyNa5FoeHmowIjk-bo",
     authDomain: "test-server-875a8.firebaseapp.com",
@@ -14,11 +10,8 @@ var firebaseConfig = {
     appId: "1:343973160482:web:c0e7d0527712cce3bacc7b",
     measurementId: "G-DG276927NL"
 };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
-// var firebase = require('firebase');
-firebase.initializeApp(firebaseConfig)
-
-export default firebase.database()
-
-// database.ref('data/').set({name:`ali`}){
-    
+export default firebase;
