@@ -1,3 +1,9 @@
+// import {firebase} from "firebase"
+var firebase = require('firebase/app');
+require('firebase/auth');
+require('firebase/database');
+
+
 var firebaseConfig = {
     apiKey: "AIzaSyB9WGsbghOWP-rBYqyNa5FoeHmowIjk-bo",
     authDomain: "test-server-875a8.firebaseapp.com",
@@ -9,11 +15,10 @@ var firebaseConfig = {
     measurementId: "G-DG276927NL"
 };
 
-var firebase = require('firebase');
-var app = firebase.initializeApp(firebaseConfig);
-let database = app.database()
+// var firebase = require('firebase');
+firebase.initializeApp(firebaseConfig)
 
-export default database
+export default firebase.database()
 
 // database.ref('data/').set({name:`ali`}){
     
