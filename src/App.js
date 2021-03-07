@@ -44,6 +44,10 @@ function App() {
 
   }, read_cookie(`currentUser`))
 
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
+
   return (
     <div className="App">
       <Router>
@@ -67,6 +71,7 @@ function App() {
 
             onClick={() => {
               bake_cookie(`currentUser`, '')
+              refreshPage()
             }}
           >Sign Out</button></a>
           }
