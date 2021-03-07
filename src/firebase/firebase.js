@@ -13,4 +13,7 @@ var firebase = require('firebase');
 var app = firebase.initializeApp(firebaseConfig);
 let database = app.database()
 
-// database.ref('data/').set({name:`ali`})
+export default database
+
+// database.ref('data/').set({name:`ali`}){
+    

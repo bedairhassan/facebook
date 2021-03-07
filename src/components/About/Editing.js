@@ -1,10 +1,13 @@
 import React from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
 
+// var destination = '../../firebase/firebase'
+// import database from destination
+// var database = require('../../firebase/firebase')
+
 const validator = require(`validator`)
 
 const Editing = () => {
-
 
     const [user, userSet] = useState({})
 
