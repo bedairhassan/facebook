@@ -11,7 +11,14 @@ const validator = require(`validator`)
 
 const Editing = () => {
 
-    const [user, userSet] = useState({})
+    const [user, userSet] = useState({
+
+        // tmp 
+        nickname:"hassan",
+        phone:"011",
+        email:"hassan@gmail.com"
+    })
+    const [submit,submitSet]=useState(false) 
 
     function easySet(attribute, value) {
 
@@ -21,20 +28,24 @@ const Editing = () => {
     }
 
     useEffect(() => {
+
+        const toSend = {...user,'user':read_cookie(`currentUser`)}
+
         // update to firebase
         firebase
         // .database("https://test-server-875a8-default-rtdb.firebaseio.com")
         .database()
         .ref("/about")
-        .push({...user,'user': read_cookie(`currentUser`)})
+        .push(toSend)
 
-    }, [user])
+    }, [submit])
 
     return (
         <div>
+            <button onClick={()=>submitSet(!submit)}>Submit</button>
             <table>
                 <tr>
-                    <td>Name</td>
+                    <td>Nickname</td>
                     <td>
                         <input
                             onChange={e => {
@@ -47,7 +58,7 @@ const Editing = () => {
                                 }
 
                                 if (condition) {
-                                    easySet(`name`, value)
+                                    easySet(`nickname`, value)
                                 }
 
                             }} />
