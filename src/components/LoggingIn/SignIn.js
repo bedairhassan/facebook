@@ -43,6 +43,10 @@ export default function Login() {
     }
   }
 
+  const refreshPage = ()=>{
+    window.location.reload();
+ }
+
   useEffect(() => {
 
     if (isLogin) {
@@ -74,7 +78,11 @@ export default function Login() {
       /> */}
 
 
-      <Button name={`Submit`} submit={() => canISignIn()} />
+      <Button name={`Submit`} submit={() => {
+
+canISignIn()
+refreshPage()
+      }} />
       {isLoginText}
 
     </React.Fragment>

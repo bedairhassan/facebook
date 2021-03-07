@@ -8,7 +8,7 @@ import SignUp from './SignUp'
 
 const Login = () => {
 
-    const [action,actionSet]=useState(`SignUp`)
+    const [action,actionSet]=useState(`SignIn`)
 
     return (
         <div>
