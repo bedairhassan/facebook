@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 
 import firebase from '../../firebase/firebase'
@@ -19,6 +20,7 @@ const Editing = () => {
 
     useEffect(() => {
         // update to firebase
+        let user = read_cookie(`currentUser`)
         // firebase.database("https://test-server-875a8-default-rtdb.firebaseio.com").ref("/about")
 
     }, [user])

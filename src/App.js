@@ -23,7 +23,6 @@ import User from './components/User'
 function App() {
 
   const [signInStatus, signInStatusset] = useState(`not signed in yet`)
-
   function isEmpty(map) { // checks on empty array or empty object or empty string
     for (var key in map) {
       if (map.hasOwnProperty(key)) {
@@ -58,12 +57,15 @@ function App() {
         <Link to="/News" class="nav-item nav-link px-3">News</Link>
           <a class="nav-link disabled" href="#"> {signInStatus}</a>
 
-          <a class="nav-link" href="#"> <button class="btn btn-danger"
-          
-          onClick={()=>{
-            bake_cookie(`currentUser`,'')
-          }}
+
+          {signInStatus !== `not signed in yet` && <a class="nav-link" href="#"> <button class="btn btn-danger"
+
+            onClick={() => {
+              bake_cookie(`currentUser`, '')
+            }}
           >Sign Out</button></a>
+          }
+
 
 
         </nav>
