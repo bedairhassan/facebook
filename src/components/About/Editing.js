@@ -13,10 +13,10 @@ const Editing = () => {
 
     const [data, dataSet] = useState({
 
-        // tmp 
-        nickname:"baddie baddie",
-        phone:"011",
-        email:"hassan@gmail.com"
+        // // tmp 
+        // nickname:"baddie baddie",
+        // phone:"011",
+        // email:"hassan@gmail.com"
     })
     const [submit,submitSet]=useState(false) 
 
@@ -113,7 +113,7 @@ const Editing = () => {
                 </tr>
                 <tr>
                     <td>name</td>
-                    <td>{data.name}</td>
+                    <td>{data.nickname}</td>
                 </tr>
                 <tr>
                     <td>phone</td>
