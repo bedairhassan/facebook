@@ -20,7 +20,6 @@ const Editing = () => {
         phone:"011",
         email:"hassan@gmail.com"
     })
-    const [submit,submitSet]=useState(false) 
 
     function easySet(attribute, value) {
 
