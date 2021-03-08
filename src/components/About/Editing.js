@@ -11,10 +11,10 @@ const validator = require(`validator`)
 
 const Editing = () => {
 
-    const [user, userSet] = useState({
+    const [data, dataSet] = useState({
 
         // tmp 
-        nickname:"him",
+        nickname:"baddie baddie",
         phone:"011",
         email:"hassan@gmail.com"
     })
@@ -22,21 +22,22 @@ const Editing = () => {
 
     function easySet(attribute, value) {
 
-        let object = { ...user }
+        let object = { ...data }
         object[attribute] = value
-        userSet(object)
+        dataSet(object)
     }
 
     function About_PUSH(){
         
-        const toSend = {...user,'user':read_cookie(`currentUser`)}
+        const user = read_cookie(`currentUser`)
+        const toSend = {...data,'user':user}
 
         // update to firebase
         firebase
         // .database("https://test-server-875a8-default-rtdb.firebaseio.com")
         .database()
         .ref("/about")
-        .child(read_cookie(`currentUser`))
+        .child(user)
         .set(toSend)
     }
 
@@ -112,14 +113,14 @@ const Editing = () => {
                 </tr>
                 <tr>
                     <td>name</td>
-                    <td>{user.name}</td>
+                    <td>{data.name}</td>
                 </tr>
                 <tr>
                     <td>phone</td>
-                    <td>{user.phone}</td>
+                    <td>{data.phone}</td>
                 </tr><tr>
                     <td>email</td>
-                    <td>{user.email}</td>
+                    <td>{data.email}</td>
                 </tr>
             </table>
             <button onClick={()=>About_PUSH()} class="btn btn-success">Submit</button>
