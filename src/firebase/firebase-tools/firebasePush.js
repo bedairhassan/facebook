@@ -1,14 +1,17 @@
 import firebase from '../firebase'
 
-export default function firebasePush({ref,child,push}){
+export default function firebasePush(first){
 
-    firebase.database().ref(`/${ref}`).child(child).push(push)
+    let {ref,child,push} = first
+
+    if(first[`child`]){
+        firebase.database().ref(`/${ref}`).child(child).push(push)
+    }else{
+        firebase.database().ref(`/${ref}`).push(push)
+    }
 }
 
-// module.exports={
+// export default function firebasePush({ref,child,push}){
 
-//     "firebaseSet": function firebaseSet({ref,child,set}){
-
-//         firebase.database().ref(`/${ref}`).child(child).set(set)
-//     }
+//     firebase.database().ref(`/${ref}`).child(child).push(push)
 // }
