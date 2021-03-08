@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react/cjs/react.development';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 
-import firebase from '../../firebase/firebase'
+// import firebase from '../../firebase/firebase'
 
-
+// import {firebaseSet} from 
+// const firebaseSet = require('../../firebase/firebase-tools/firebaseSet')
+import firebaseSet from '../../firebase/firebase-tools/firebaseSet'
 
 const validator = require(`validator`)
 
@@ -14,9 +16,9 @@ const Editing = () => {
     const [data, dataSet] = useState({
 
         // // tmp 
-        // nickname:"baddie baddie",
-        // phone:"011",
-        // email:"hassan@gmail.com"
+        nickname:"baddie baddie2",
+        phone:"011",
+        email:"hassan@gmail.com"
     })
     const [submit,submitSet]=useState(false) 
 
@@ -27,16 +29,12 @@ const Editing = () => {
         dataSet(object)
     }
 
-    function firebaseSet({ref,child,set}){
+   
 
-        firebase.database().ref(`/${ref}`).child(child).set(set)
-    }
-
-    function About_PUSH(){
+    function Submit(){
         
         const user = read_cookie(`currentUser`)
         const set = {...data,'user':user}
-
 
         firebaseSet({
             ref:'/about',
@@ -127,7 +125,7 @@ const Editing = () => {
                     <td>{data.email}</td>
                 </tr>
             </table>
-            <button onClick={()=>About_PUSH()} class="btn btn-success">Submit</button>
+            <button onClick={()=>Submit()} class="btn btn-success">Submit</button>
         </div>
     );
 };
