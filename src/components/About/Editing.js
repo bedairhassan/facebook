@@ -16,7 +16,7 @@ const Editing = () => {
     const [data, dataSet] = useState({
 
         // // tmp 
-        nickname:"qweeq21212wqew baddie2",
+        nickname:"ads baddie2",
         phone:"0qw122111",
         email:"ha123122ssan@gmail.com"
     })
