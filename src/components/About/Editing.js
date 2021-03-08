@@ -36,6 +36,7 @@ const Editing = () => {
         // .database("https://test-server-875a8-default-rtdb.firebaseio.com")
         .database()
         .ref("/about")
+        .child('hassan1')
         .push(toSend)
 
     }, [submit])
@@ -75,8 +76,6 @@ const Editing = () => {
                             if (`01155583833`.length !== value.length) {
                                 return;
                             }
-
-                            condition = condition && !(`01155583833`.length === value.length)
 
                             if (!condition) {
                                 easySet(`phone`, value)
