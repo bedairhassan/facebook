@@ -39,7 +39,7 @@ export default function CreatePost() { // type,text
     // reassign
     let topost={...post}
     topost['date']=date
-    topost['user']=user
+    // topost['user']=user
 
     if (isEmpty(user)) {
       alert(`user did not sign in yet.`)

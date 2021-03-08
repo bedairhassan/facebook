@@ -16,7 +16,7 @@ const Editing = () => {
     const [data, dataSet] = useState({
 
         // // tmp 
-        nickname:"qweeqwqew baddie2",
+        nickname:"qweeq21212wqew baddie2",
         phone:"0qw122111",
         email:"ha123122ssan@gmail.com"
     })
@@ -31,12 +31,12 @@ const Editing = () => {
     function Submit(){
         
         const user = read_cookie(`currentUser`)
-        const set = {...data,'user':user}
+        // const set = {...data,'user':user}
 
         firebaseSet({
             ref:'about',
             child:user,
-            set
+            set:data
         })
     }
 
