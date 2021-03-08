@@ -28,6 +28,7 @@ const Editing = () => {
     }
 
     function About_PUSH(){
+        
         const toSend = {...user,'user':read_cookie(`currentUser`)}
 
         // update to firebase
@@ -35,7 +36,7 @@ const Editing = () => {
         // .database("https://test-server-875a8-default-rtdb.firebaseio.com")
         .database()
         .ref("/about")
-        .child('hassan1')
+        .child(read_cookie(`currentUser`))
         .set(toSend)
     }
 
