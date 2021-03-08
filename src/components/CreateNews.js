@@ -5,6 +5,9 @@ import RowCell from '../reusable-components/RowCell'
 import Input from '../reusable-components/Input'
 import { bake_cookie, read_cookie } from "sfcookies"
 
+// import firebaseSet from '../../firebase/firebase-tools/firebaseSet'
+import firebasePush from '../firebase/firebase-tools/firebasePush'
+
 
 export default function CreatePost() { // type,text
 
@@ -26,32 +29,29 @@ export default function CreatePost() { // type,text
     return true;
   }
 
-  function assign_(variable, array) {
-
-    array.map(string => {
-      let [key, value] = string.split('|')
-      variable[key] = value
-    })
-
-    return variable
-  }
-
-
+  
   function submit() {
 
     // extra attributes
     let date = new Date() + ``
     let user = read_cookie(`currentUser`)
 
-    // assign date and assign user
-    let topost = assign_(post, [`date|${date}`, `user|${user}`])
+    // reassign
+    let topost={...post}
+    topost['date']=date
+    topost['user']=user
 
     if (isEmpty(user)) {
       alert(`user did not sign in yet.`)
       return;
     }
 
-    // firebase: the `topost` variable to `posts` 
+    // firebase: the `topost` variable to `posts`
+    firebasePush({
+      ref:'news',
+      child:user,
+      push:topost
+    })
   }
 
   return (

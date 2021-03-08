@@ -16,9 +16,9 @@ const Editing = () => {
     const [data, dataSet] = useState({
 
         // // tmp 
-        nickname:"baddie baddie2",
-        phone:"011",
-        email:"hassan@gmail.com"
+        nickname:"qweeqwqew baddie2",
+        phone:"0qw122111",
+        email:"ha123122ssan@gmail.com"
     })
 
     function easySet(attribute, value) {
@@ -28,15 +28,13 @@ const Editing = () => {
         dataSet(object)
     }
 
-   
-
     function Submit(){
         
         const user = read_cookie(`currentUser`)
         const set = {...data,'user':user}
 
         firebaseSet({
-            ref:'/about',
+            ref:'about',
             child:user,
             set
         })
