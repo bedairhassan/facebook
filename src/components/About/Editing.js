@@ -52,13 +52,14 @@ const Editing = () => {
                             onChange={e => {
 
                                 let value = e.target.value
-                                let condition = validator.isAlpha(value)
+                                
 
                                 if (value.length > 10) {
                                     return;
                                 }
 
-                                if (condition) {
+
+                                if (validator.isAlpha(value)) {
                                     easySet(`nickname`, value)
                                 }
 
