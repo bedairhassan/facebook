@@ -14,7 +14,7 @@ const Editing = () => {
     const [user, userSet] = useState({
 
         // tmp 
-        nickname:"hassan",
+        nickname:"him",
         phone:"011",
         email:"hassan@gmail.com"
     })
@@ -27,8 +27,7 @@ const Editing = () => {
         userSet(object)
     }
 
-    useEffect(() => {
-
+    function About_PUSH(){
         const toSend = {...user,'user':read_cookie(`currentUser`)}
 
         // update to firebase
@@ -37,13 +36,11 @@ const Editing = () => {
         .database()
         .ref("/about")
         .child('hassan1')
-        .push(toSend)
-
-    }, [submit])
+        .set(toSend)
+    }
 
     return (
         <div>
-            <button onClick={()=>submitSet(!submit)}>Submit</button>
             <table>
                 <tr>
                     <td>Nickname</td>
@@ -124,6 +121,7 @@ const Editing = () => {
                     <td>{user.email}</td>
                 </tr>
             </table>
+            <button onClick={()=>About_PUSH()} class="btn btn-success">Submit</button>
         </div>
     );
 };
