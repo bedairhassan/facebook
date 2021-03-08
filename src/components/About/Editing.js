@@ -27,18 +27,22 @@ const Editing = () => {
         dataSet(object)
     }
 
+    function firebaseSet({ref,child,set}){
+
+        firebase.database().ref(`/${ref}`).child(child).set(set)
+    }
+
     function About_PUSH(){
         
         const user = read_cookie(`currentUser`)
-        const toSend = {...data,'user':user}
+        const set = {...data,'user':user}
 
-        // update to firebase
-        firebase
-        // .database("https://test-server-875a8-default-rtdb.firebaseio.com")
-        .database()
-        .ref("/about")
-        .child(user)
-        .set(toSend)
+
+        firebaseSet({
+            ref:'/about',
+            child:user,
+            set
+        })
     }
 
     return (
