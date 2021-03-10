@@ -7,6 +7,7 @@ import { bake_cookie } from "sfcookies"
 import Sign from '../../reusable-components/Sign'
 import firebase from '../../firebase/firebase'
 
+import arrayResult from '../../tools/arrayResult'
 
 export default function Login() {
 
@@ -32,28 +33,24 @@ export default function Login() {
   function canISignIn() {
 
     firebase.database().ref('/availableUsers').on("value", function (snapshot) {
-      snapshot.forEach(function (data) {
 
-        let guest = data.val()
-        let ifEqualPass = guest[`password`] === user[`password`]
-        let ifEqualUsername = guest[`username`] === user[`username`]
+      let array = arrayResult(snapshot.val()).filter(guest => guest[`password`] === user[`password`] && guest[`username`] === user[`username`])
+console.table(array)
 
-        if(ifEqualUsername&&ifEqualPass){
-
-          bake_cookie(`currentUser`, user[`username`])
-          isLoginset(true)
-          refreshPage()
-
-          return;
+      if (array.length > 0) {
+        bake_cookie(`currentUser`, user[`username`])
+        isLoginset(true)
         }else{
-          isLoginset(false)
-        }
+        alert(`Incorrect Username or password`)
+        isLoginset(false)
+      }
 
-
-      });
+      refreshPage()
     });
 
-    
+
+    // refreshPage()
+
   }
 
   const refreshPage = () => {
@@ -70,14 +67,14 @@ export default function Login() {
       />
 
 
-      <Button 
-      
-      className="btn btn-success"
-      name={`Submit`} submit={() => {
+      <Button
 
-        canISignIn()
-        // refreshPage()
-      }} />
+        className="btn btn-success"
+        name={`Submit`} submit={() => {
+
+          canISignIn()
+          // refreshPage()
+        }} />
       {isLoginText}
 
     </React.Fragment>
