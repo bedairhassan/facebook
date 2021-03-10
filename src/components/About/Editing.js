@@ -11,7 +11,7 @@ import firebaseSet from '../../firebase/firebase-tools/firebaseSet'
 
 const validator = require(`validator`)
 
-const Editing = () => {
+const Editing = ({ placeholder }) => { // for placeholder!
 
     const [data, dataSet] = useState({
 
@@ -28,15 +28,15 @@ const Editing = () => {
         dataSet(object)
     }
 
-    function Submit(){
-        
+    function Submit() {
+
         const user = read_cookie(`currentUser`)
         // const set = {...data,'user':user}
 
         firebaseSet({
-            ref:'about',
-            child:user,
-            set:data
+            ref: 'about',
+            child: user,
+            set: data
         })
     }
 
@@ -47,10 +47,11 @@ const Editing = () => {
                     <td>Nickname</td>
                     <td>
                         <input
+                            placeholder={placeholder[`nickname`]}
                             onChange={e => {
 
                                 let value = e.target.value
-                                
+
 
                                 if (value.length > 10) {
                                     return;
@@ -67,26 +68,32 @@ const Editing = () => {
                 <tr>
                     <td>Phone</td>
                     <td>
-                        <input onChange={e => {
+                        <input
+                            placeholder={placeholder[`phone`]}
 
-                            let value = e.target.value
-                            let condition = validator.isAlpha(value)
+                            onChange={e => {
 
-                            if (`01155583833`.length !== value.length) {
-                                return;
-                            }
+                                let value = e.target.value
+                                let condition = validator.isAlpha(value)
 
-                            if (!condition) {
-                                easySet(`phone`, value)
-                            }
+                                if (`01155583833`.length !== value.length) {
+                                    return;
+                                }
 
-                        }} />
+                                if (!condition) {
+                                    easySet(`phone`, value)
+                                }
+
+                            }} />
                     </td>
                 </tr>
                 <tr>
                     <td>Email Address</td>
                     <td>
-                        <input onChange={e => {
+                        <input
+                        
+                        placeholder={placeholder[`email`]}
+                        onChange={e => {
 
                             let value = e.target.value
                             let condition = validator.isEmail(value)
@@ -122,7 +129,7 @@ const Editing = () => {
                     <td>{data.email}</td>
                 </tr>
             </table>
-            <button onClick={()=>Submit()} class="btn btn-success">Submit</button>
+            <button onClick={() => Submit()} class="btn btn-success">Submit</button>
         </div>
     );
 };

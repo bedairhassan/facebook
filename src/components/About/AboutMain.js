@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
+import firebase from '../../firebase/firebase'
 
 // sub components
 import Editing from './Editing'
@@ -26,6 +27,21 @@ function isEmpty(map) { // checks on empty array or empty object or empty string
 export default function About() {
 
   const [isEditing, isEditingset] = useState(true)
+  const [user, userSet] = useState()
+
+  useEffect(() => {
+
+    let username = read_cookie(`currentUser`)
+
+    // get value from firebase
+    firebase.database().ref('/about').child(username).on("value", function (snapshot) {
+      console.log(snapshot.val());
+
+      userSet(snapshot.val())
+
+    });
+
+  }, [])
 
   return (
     <React.Fragment>
@@ -42,8 +58,8 @@ export default function About() {
             Trigger={() => isEditingset(!isEditing)}
             condition={isEditing} />
 
-          {isEditing && <Editing />}
-          {!isEditing && <Plain />}
+          {isEditing && <Editing placeholder={user}/>}
+          {!isEditing && <Plain user={user}/>}
         </React.Fragment>
 
       }
