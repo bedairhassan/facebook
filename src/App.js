@@ -54,7 +54,7 @@ function App() {
 
               <Link to="/About" class="nav-item nav-link px-3">About |</Link>
               <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
-              <Link to="/News" class="nav-item nav-link px-3">News |</Link>
+              <Link to="/News" class="nav-item nav-link px-3">Announcements |</Link>
             </React.Fragment>
           }
 
