@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from "react"
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
-import firebase from '../firebase/firebase'
+import firebase from '../../firebase/firebase'
 
 // reusable
-import Table from '../reusable-components/Table'
+import Table from '../../reusable-components/Table'
 
-import isEmpty from '../tools/isEmpty'
+import isEmpty from '../../tools/isEmpty'
+
+// import '../../components/News/News.css'
+import '../News/News.css'
 
 const User = () => {
 
     const [user, userSet] = useState({})
 
-    function createUser(string) {// extra
-
-        let array = string.split(' ')
-        let name = array[0]
-        let phone = array[1]
-        let email = array[2]
-
-        return { name, phone, email }
-    }
-
-
-
     useEffect(() => {
-
-
-
         let name = read_cookie(`usertoDisplay`)
-
-
         firebase.database().ref('/about').child(name).on("value", function (snapshot) {
             console.log(snapshot.val());
 
@@ -38,16 +24,6 @@ const User = () => {
             snapshot.forEach(function (data) {
             });
         });
-
-        // let firebase = [createUser(`ali 12991291 ali@gmail.com`),createUser(`mohammed 91289172 mohammed@gmail.com`)]
-
-        // let filtered = firebase.filter(each=>each.name===name)
-        // console.log('filtered', filtered)
-
-        // if(filtered.length>0){
-        // userSet(filtered[0])
-        // }
-
     }, [])
 
     return (
@@ -59,7 +35,7 @@ const User = () => {
             {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
                 <React.Fragment>
-                    A user
+                    <h1>You visited {read_cookie(`currentUser`)}</h1>
             <Table user={user} />
                 </React.Fragment>
 

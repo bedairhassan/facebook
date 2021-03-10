@@ -7,13 +7,6 @@ import { bake_cookie } from "sfcookies"
 import Sign from '../../reusable-components/Sign'
 import firebase from '../../firebase/firebase'
 
-// TODO: NOTE, this function is repeated!
-const arrayResult = (rooms) => {
-  return Object.keys(rooms).map(room => {
-    let q = rooms[room]
-    return q
-  })
-};
 
 export default function Login() {
 

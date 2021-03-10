@@ -16,6 +16,11 @@ export default function CreatePost() { // type,text
   const [post, postset] = useState({})
 
   function setpost(key, value) { // can be reusable 
+    
+    if(key===`type` && !(key in value)){ // if user didn't choose anything from dropdown menu
+      return;
+    }
+
     const tmp = { ...post }
     tmp[key] = value
     postset(tmp)
@@ -57,18 +62,18 @@ export default function CreatePost() { // type,text
 
       {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
-        <React.Fragment>
+        <div align="middle">
           <h1>Create News</h1>
 
           <table>
-            <RowCell
+            <RowCell // {Row,Name}
               Row={<Input
                 retrieveValue={text => setpost(`text`, text)}
                 hint={`Text`} />}
               Name={`Enter Text For Post`}
             />
 
-            <RowCell
+            <RowCell //{Row,Name}
               Row={<Select
                 retrieveValue={type => setpost(`type`, type)}
                 data={[`Choose`, `news`, `post`]} />}
@@ -78,8 +83,7 @@ export default function CreatePost() { // type,text
 
           <button className="btn btn-danger" onClick={() => submit()}>Submit</button>
 
-        </React.Fragment>
-
+        </div>
       }
 
 

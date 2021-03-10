@@ -1,38 +1,12 @@
 import React from 'react';
-import { useEffect, useState } from 'react/cjs/react.development';
-import './News.css';
-import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
-import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
-import firebase from '../../firebase/firebase'
+import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom';
 import isEmpty from '../../tools/isEmpty'
 
-const arrayResult = (rooms) => {
-    return Object.keys(rooms).map(room => {
-        let q = rooms[room]
-        return q
-    })
-};
 
+const NewsMain = ({data}) => {
 
-
-const NewsMain = () => {
-
-    const [data, dataSet] = useState([])
-
-    // load from firebase then sort. 
-    useEffect(() => {
-
-        firebase.database().ref('/news').on("value", function (snapshot) {
-            // console.log(snapshot.val());
-            console.table()
-            dataSet(sortByNewsFirst(arrayResult(snapshot.val())))
-
-
-            snapshot.forEach(function (data) {
-            });
-        })
-    }, [])
+    
 
     // todo: reusable, put it in its own file
    

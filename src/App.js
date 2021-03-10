@@ -16,9 +16,11 @@ import Button from '../src/reusable-components/Button'
 import CreatePost from './components/CreateNews'
 import Login from './components/LoggingIn/Login'
 import About from './components/About/AboutMain'
-import News from './components/News/NewsMain'
+import News from './components/News/NewsPublic'
 import Table from './reusable-components/Table'
-import User from './components/User'
+
+import User from './components/User/User'
+
 import refreshPage from './tools/refreshPage'
 
 
