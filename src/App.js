@@ -54,7 +54,7 @@ function App() {
   return (
     <div className="App">
 
-      <Environment />
+      {/* <Environment /> */}
 
 
 
@@ -63,15 +63,18 @@ function App() {
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 
-          {signInStatus === `not signed in yet` &&
-            <Link to="/login" class="nav-item nav-link px-3">Login |</Link>
+          {signInStatus === `not signed in yet` ?
+            <Link to="/login" class="nav-item nav-link px-3">Login |</Link>:
+            
+            
+            <React.Fragment>
+            <Link to="/About" class="nav-item nav-link px-3">About |</Link>
+            <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
+            <Link to="/News" class="nav-item nav-link px-3">News |</Link>
+            </React.Fragment>
           }
 
-          <Link to="/About" class="nav-item nav-link px-3">About |</Link>
-
-          <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
-
-          <Link to="/News" class="nav-item nav-link px-3">News |</Link>
+          
           <a class="nav-link disabled" href="#"> {signInStatus}</a>
 
 

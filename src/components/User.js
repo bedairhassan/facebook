@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
+import firebase from '../firebase/firebase'
 
 // reusable
 import Table from '../reusable-components/Table'
@@ -20,16 +21,28 @@ const User = () => {
 
     useEffect(() => {
 
+
+
         let name = read_cookie(`usertoDisplay`)
 
-        let firebase = [createUser(`ali 12991291 ali@gmail.com`),createUser(`mohammed 91289172 mohammed@gmail.com`)]
 
-        let filtered = firebase.filter(each=>each.name===name)
-        console.log('filtered', filtered)
+        firebase.database().ref('/about').child(name).on("value", function (snapshot) {
+            console.log(snapshot.val());
 
-        if(filtered.length>0){
-            userSet(filtered[0])
-        }
+            userSet(snapshot.val())
+
+            snapshot.forEach(function (data) {
+            });
+        });
+
+        // let firebase = [createUser(`ali 12991291 ali@gmail.com`),createUser(`mohammed 91289172 mohammed@gmail.com`)]
+
+        // let filtered = firebase.filter(each=>each.name===name)
+        // console.log('filtered', filtered)
+
+        // if(filtered.length>0){
+            // userSet(filtered[0])
+        // }
 
     }, [])
 
