@@ -5,10 +5,24 @@ import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import firebase from '../../firebase/firebase'
 
 
-const Plain = ({user}) => {
+const Plain = ({}) => {
 
     // const [user, userSet] = useState({}) // name, phone,email
+    const [user, userSet] = useState()
 
+    useEffect(() => {
+  
+      let username = read_cookie(`currentUser`)
+  
+      // get value from firebase
+      firebase.database().ref('/about').child(username).on("value", function (snapshot) {
+        // console.log(snapshot.val());
+  
+        userSet(snapshot.val())
+  
+      });
+  
+    }, [])
     
 
     return (

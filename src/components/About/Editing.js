@@ -11,7 +11,7 @@ import firebaseSet from '../../firebase/firebase-tools/firebaseSet'
 
 const validator = require(`validator`)
 
-const Editing = ({ placeholder }) => { // for placeholder!
+const Editing = ({ }) => { // for placeholder!
 
     const [data, dataSet] = useState({
 

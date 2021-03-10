@@ -10,14 +10,42 @@ import isEmpty from '../../tools/isEmpty'
 // import '../../components/News/News.css'
 import '../News/News.css'
 
+import NewsMain from '../News/NewsMain'
+
+
+import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
+import arrayResult from '../../tools/arrayResult'
+
 const User = () => {
+
+
+
+    const [data, dataSet] = useState([])
+
+    // load from firebase then sort. 
+    useEffect(() => {
+
+        firebase.database().ref('/news').on("value", function (snapshot) {
+
+            let ARRAY = arrayResult(snapshot.val()).filter(item => read_cookie(`usertoDisplay`) === item[`user`])
+
+            dataSet(sortByNewsFirst(ARRAY))
+
+        })
+    }, [])
+
+
+    //// 
+
+
+
 
     const [user, userSet] = useState({})
 
     useEffect(() => {
         let name = read_cookie(`usertoDisplay`)
         firebase.database().ref('/about').child(name).on("value", function (snapshot) {
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
 
             userSet(snapshot.val())
 
@@ -29,21 +57,34 @@ const User = () => {
     return (
 
 
-        <div>
+        <React.Fragment>
 
 
             {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
                 <React.Fragment>
-                    <h1>You visited {read_cookie(`currentUser`)}</h1>
-            <Table user={user} />
+
+                    <h1 class="header">You visited {read_cookie(`usertoDisplay`)}</h1>
+
+                    <div class="body">
+                    <div class="rightcolumn">
+                        <Table user={user} />
+                    </div>
+
+
+
+                    <div class="leftcolumn">
+                        <NewsMain data={data} />
+                    </div>
+                    </div>
+
                 </React.Fragment>
 
             }
 
 
 
-        </div>
+        </React.Fragment>
     );
 };
 

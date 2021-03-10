@@ -25,7 +25,7 @@ const NewsPublic = () => {
 
     return (
         <div>
-            <NewsMain data={data}/>
+            <NewsMain data={data} optionalTitle={true}/>
         </div>
     );
 };

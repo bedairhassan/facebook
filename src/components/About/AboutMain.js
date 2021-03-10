@@ -18,29 +18,34 @@ import DisplayIf from '../../reusable-components/DisplayIf'
 
 // todo:put isempty in separate file
 
+import arrayResult from '../../tools/arrayResult'
+import NewsMain from '../News/NewsMain'
+
+
+import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 
 export default function About() {
 
-  const [isEditing, isEditingset] = useState(true)
-  const [user, userSet] = useState()
+  const [isEditing, isEditingset] = useState(false)
 
+
+
+  const [data, dataSet] = useState([])
+
+  // load from firebase then sort. 
   useEffect(() => {
 
-    let username = read_cookie(`currentUser`)
+    firebase.database().ref('/news').on("value", function (snapshot) {
 
-    // get value from firebase
-    firebase.database().ref('/about').child(username).on("value", function (snapshot) {
-      console.log(snapshot.val());
+      let ARRAY = arrayResult(snapshot.val()).filter(item => read_cookie(`currentUser`) === item[`user`])
 
-      userSet(snapshot.val())
+      dataSet(sortByNewsFirst(ARRAY))
 
-    });
-
+    })
   }, [])
 
   return (
     <React.Fragment>
-
 
       {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
@@ -53,8 +58,20 @@ export default function About() {
             Trigger={() => isEditingset(!isEditing)}
             condition={isEditing} />
 
-          {isEditing && <Editing placeholder={user}/>}
-          {!isEditing && <Plain user={user}/>}
+          {{
+            true: <div align="middle"><Editing /></div>,
+            false: <React.Fragment>
+
+
+              <div class="rightcolumn">              <Plain />
+              </div>
+
+              <div class="leftcolumn">              <NewsMain data={data} />
+              </div>
+            </React.Fragment>
+          }[isEditing]}
+
+
         </React.Fragment>
 
       }

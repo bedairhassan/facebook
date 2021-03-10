@@ -4,8 +4,8 @@ let person = {
 }
 
 if (person[`name`]) {
-    console.log(`${person[`name`]} has been found`)
+    // console.log(`${person[`name`]} has been found`)
 
 } else {
-    console.log(`name is not available`)
+    // console.log(`name is not available`)
 }

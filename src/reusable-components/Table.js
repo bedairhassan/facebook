@@ -11,7 +11,7 @@ const Table = ({ user }) => {
 
     useEffect(() => {
 
-        console.log('user', user)
+        // console.log('user', user)
 
         if (isEmpty(user)) {
             isShowset(false)

@@ -4,12 +4,12 @@ import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-ro
 import isEmpty from '../../tools/isEmpty'
 
 
-const NewsMain = ({data}) => {
+const NewsMain = ({ data,optionalTitle}) => {
 
-    
+
 
     // todo: reusable, put it in its own file
-   
+
 
     return (
         <React.Fragment>
@@ -17,7 +17,9 @@ const NewsMain = ({data}) => {
             {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
                 <React.Fragment>
-                    <h1>News</h1>
+                    {
+                        optionalTitle&&<h1>Announcements: News or Posts</h1>
+                    }
                     <div >
                         <div >
                             {data.map(card => <Card card={card} />)}
@@ -33,19 +35,33 @@ const NewsMain = ({data}) => {
 };
 
 function Card({ card }) {
+
+    const NewsPaper = card[`type`] === `news` && <sub>📰</sub>
+
     return (
 
         <React.Fragment>
             <div className="card">
-                <h2>{card[`text`]}</h2>
+                <h2>
+                    {NewsPaper}
+                    {card[`text`]}
+                    {NewsPaper}
+                </h2>
                 <h5 align="right">{card[`type`]} posted at {card[`date`]}</h5>
                 <p align="left">
-                    <Link to="/user" onClick={() => {
 
-                        let user = card[`user`]
-                        bake_cookie(`usertoDisplay`, user)
+                    {{
+                        true: <Link to="/about">YOU</Link>,
+                        false:
+                            <Link to="/user" onClick={() => {
 
-                    }}>{card[`user`]}</Link>
+                                let user = card[`user`]
+                                bake_cookie(`usertoDisplay`, user)
+
+                            }}>{card[`user`]}</Link>
+                    }[card[`user`] === read_cookie(`currentUser`)] // USER IS YOU
+                    }
+
                 </p>
             </div>
         </React.Fragment>
