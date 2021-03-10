@@ -1,12 +1,14 @@
 import firebase from '../firebase'
 
-export default function firebasePush(first){
+export default function firebasePush(first) {
 
-    let {ref,child,push} = first
+    let { ref, child, push } = first
 
-    if(first[`child`]){
+    //TODO: if (`child` in first)
+
+    if (first[`child`]) {
         firebase.database().ref(`/${ref}`).child(child).push(push)
-    }else{
+    } else {
         firebase.database().ref(`/${ref}`).push(push)
     }
 }

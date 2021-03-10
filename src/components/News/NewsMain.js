@@ -13,7 +13,7 @@ const NewsMain = () => {
     // load from firebase then sort. 
     useEffect(() => {
 
-        let data = sortByNewsFirst([
+        let array=[
             { type: `post`, text: `post4`, user: `whatever`, date: `9-1-2019` },
             { type: `news`, text: `news1`, user: `mohammed`, date: `9-1-2020` },
             { type: `news`, text: `news2`, user: `ali`, date: `9-1-2029` },
@@ -21,7 +21,8 @@ const NewsMain = () => {
             { type: `post`, text: `post1`, user: `user919`, date: `9-1-2029` },
             { type: `post`, text: `post2`, user: `user919`, date: `9-1-2029` },
             { type: `post`, text: `post3`, user: `user919`, date: `9-1-2029` }
-        ])
+        ]
+        let data = sortByNewsFirst(array)
         // console.log('qaqdwdas', data)
         dataSet(sortByNewsFirst(data))
     }, [])

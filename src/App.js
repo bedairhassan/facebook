@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import firebase from '../src/firebase/firebase'
 import firebaseReceiveChild from '../src/firebase/firebase-tools/firebaseReceiveChild'
+import firebasePush from '../src/firebase/firebase-tools/firebasePush'
 
 // reusable
 import Input from '../src/reusable-components/Input'
@@ -53,7 +54,7 @@ function App() {
   return (
     <div className="App">
 
-{/* <Environment /> */}
+      <Environment />
 
 
 
@@ -110,14 +111,45 @@ function App() {
   );
 }
 
+function makeid(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 function Environment() {
 
   function submit() {
 
-    let obj = firebaseReceiveChild({ref:`/about`,child:'admin'})
+    let admins = [`admin`, `hassan`, `mohammed`, `ali`]
+
+
+    for (const admin of admins) {
+      for (let i = 0; i < 5; i++) {
+
+        let push = {
+          date: new Date() + ``,
+          type: makeid(10),
+          text: makeid(10),
+          user:admin
+        }
+
+
+        // expect 4*5 NEW posts!
+        firebasePush({
+          ref: `/news`,
+          push
+        })
+      }
+    }
+
+
     // console.log('obj', obj)
-    setTimeout(function(){ console.log('obj', obj) }, 3000);
-    
+
 
     // firebase.database().ref('/about').child('mohy').on("value", function (snapshot) {
     //   console.log(snapshot.val());
