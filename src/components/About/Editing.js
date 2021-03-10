@@ -47,7 +47,7 @@ const Editing = ({ placeholder }) => { // for placeholder!
                     <td>Nickname</td>
                     <td>
                         <input
-                            placeholder={placeholder[`nickname`]}
+                            // placeholder={placeholder[`nickname`]}
                             onChange={e => {
 
                                 let value = e.target.value
@@ -69,7 +69,7 @@ const Editing = ({ placeholder }) => { // for placeholder!
                     <td>Phone</td>
                     <td>
                         <input
-                            placeholder={placeholder[`phone`]}
+                            // placeholder={placeholder[`phone`]}
 
                             onChange={e => {
 
@@ -92,7 +92,7 @@ const Editing = ({ placeholder }) => { // for placeholder!
                     <td>
                         <input
                         
-                        placeholder={placeholder[`email`]}
+                        // placeholder={placeholder[`email`]}
                         onChange={e => {
 
                             let value = e.target.value

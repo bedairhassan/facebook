@@ -30,7 +30,7 @@ const Signup = () => {
             .database()
             .ref('/availableUsers')
             .child(user[`username`])
-            .on("value", function (snapshot) {
+            .on("value",  (snapshot) =>{
 
                 if (!(snapshot.val() === null) && !allowSignIn) {
                     document.getElementById('usernameRef').value = '';

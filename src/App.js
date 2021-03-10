@@ -35,17 +35,6 @@ function App() {
     return true;
   }
 
-  useEffect(() => {
-
-    let user = read_cookie(`currentUser`)
-    if (isEmpty(user)) {
-      signInStatusset(`not signed in yet`)
-    } else {
-
-      signInStatusset(`Signed in as ${user}`)
-    }
-
-  }, read_cookie(`currentUser`))
 
   const refreshPage = () => {
     window.location.reload();
@@ -64,30 +53,35 @@ function App() {
 
 
           {signInStatus === `not signed in yet` ?
-            <Link to="/login" class="nav-item nav-link px-3">Login |</Link>:
-            
-            
+            <Link to="/login" class="nav-item nav-link px-3">Login |</Link> :
+
+
             <React.Fragment>
-            <Link to="/About" class="nav-item nav-link px-3">About |</Link>
-            <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
-            <Link to="/News" class="nav-item nav-link px-3">News |</Link>
+
+
+              <Link to="/About" class="nav-item nav-link px-3">About |</Link>
+              <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
+              <Link to="/News" class="nav-item nav-link px-3">News |</Link>
             </React.Fragment>
           }
 
-          
-          <a class="nav-link disabled" href="#"> {signInStatus}</a>
+          <a class="nav-link disabled" href="#">
+
+            {/* {signInStatus} */}
 
 
-          {signInStatus !== `not signed in yet` && <a class="nav-link" href="#"> <button class="btn btn-danger"
+            {isEmpty(read_cookie(`currentUser`)) ? `not signed yet` : `signed in as ${read_cookie(`currentUser`)}`}
 
+          </a>
+
+
+          {signInStatus !== `not signed in yet` && <div
             onClick={() => {
               bake_cookie(`currentUser`, '')
               refreshPage()
-            }}
-          >Sign Out</button></a>
-          }
-
-
+            }}>
+            <Link to="/login" class="nav-item nav-link px-3">Sign Out</Link>
+          </div>}
 
         </nav>
 
@@ -130,7 +124,7 @@ function Environment() {
 
     let admins = [`admin`, `hassan`, `mohammed`, `ali`]
 
-    let types = [`news`,`post`]
+    let types = [`news`, `post`]
 
     for (const admin of admins) {
       for (let i = 0; i < 5; i++) {
@@ -139,7 +133,7 @@ function Environment() {
           date: new Date() + ``,
           type: types[Math.floor(Math.random() * 2)],
           text: makeid(10),
-          user:admin
+          user: admin
         }
 
 
