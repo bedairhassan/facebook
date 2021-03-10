@@ -78,7 +78,7 @@ export default function CreatePost() { // type,text
             <RowCell
               Row={<Select
                 retrieveValue={type => setpost(`type`, type)}
-                data={[`Choose`, `Post`, `Announcement`]} />}
+                data={[`Choose`, `news`, `post`]} />}
               Name={`Enter Type of Post`}
             />
           </table>

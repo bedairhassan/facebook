@@ -48,8 +48,8 @@ const NewsMain = () => {
 
                 <React.Fragment>
                     <h1>News</h1>
-                    <div className="row">
-                        <div className="leftcolumn">
+                    <div >
+                        <div >
                             {data.map(card => <Card card={card} />)}
                             {/* <Card data={{ type: `news`, text: `hello everyone`, user: `user919` }}/> */}
                         </div>
