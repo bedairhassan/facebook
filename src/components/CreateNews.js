@@ -29,7 +29,7 @@ export default function CreatePost() { // type,text
     return true;
   }
 
-  
+
   function submit() {
 
     // extra attributes
@@ -37,9 +37,9 @@ export default function CreatePost() { // type,text
     let user = read_cookie(`currentUser`)
 
     // reassign
-    let topost={...post}
-    topost['date']=date
-    topost['user']=user
+    let topost = { ...post }
+    topost['date'] = date
+    topost['user'] = user
 
     if (isEmpty(user)) {
       alert(`user did not sign in yet.`)
@@ -48,8 +48,8 @@ export default function CreatePost() { // type,text
 
     // firebase: the `topost` variable to `posts`
     firebasePush({
-      ref:'news',
-      push:topost
+      ref: 'news',
+      push: topost
     })
 
     // firebasePush({
@@ -61,25 +61,35 @@ export default function CreatePost() { // type,text
 
   return (
     <React.Fragment>
-      <h1>Create News</h1>
 
-      <table>
-        <RowCell
-          Row={<Input
-            retrieveValue={text => setpost(`text`, text)}
-            hint={`Text`} />}
-          Name={`Enter Text For Post`}
-        />
+      {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
-        <RowCell
-          Row={<Select
-            retrieveValue={type => setpost(`type`, type)}
-            data={[`Choose`, `Post`, `Announcement`]} />}
-          Name={`Enter Type of Post`}
-        />
-      </table>
+        <React.Fragment>
+          <h1>Create News</h1>
 
-      <button className="btn btn-danger" onClick={() => submit()}>Submit</button>
+          <table>
+            <RowCell
+              Row={<Input
+                retrieveValue={text => setpost(`text`, text)}
+                hint={`Text`} />}
+              Name={`Enter Text For Post`}
+            />
+
+            <RowCell
+              Row={<Select
+                retrieveValue={type => setpost(`type`, type)}
+                data={[`Choose`, `Post`, `Announcement`]} />}
+              Name={`Enter Type of Post`}
+            />
+          </table>
+
+          <button className="btn btn-danger" onClick={() => submit()}>Submit</button>
+
+        </React.Fragment>
+
+      }
+
+
 
     </React.Fragment>
   )

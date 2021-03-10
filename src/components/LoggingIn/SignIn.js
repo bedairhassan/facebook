@@ -5,6 +5,15 @@ import Button from '../../reusable-components/Button'
 import { bake_cookie } from "sfcookies"
 
 import Sign from '../../reusable-components/Sign'
+import firebase from '../../firebase/firebase'
+
+// TODO: NOTE, this function is repeated!
+const arrayResult = (rooms) => {
+  return Object.keys(rooms).map(room => {
+    let q = rooms[room]
+    return q
+  })
+};
 
 export default function Login() {
 
@@ -14,7 +23,6 @@ export default function Login() {
 
   // users who have previously signed up successfully to website
   const [availableUsers, availableUsersset] = useState([
-    { 'username': 'admin', 'password': 'hassan' }
   ])
 
   // contains username and password
@@ -26,62 +34,69 @@ export default function Login() {
     userset(tmp)
   }
 
+
   // compares object {user} with availableUsers
   function canISignIn() {
+
+    firebase.database().ref('/availableUsers').on("value", function (snapshot) {
+
+      // TODO: query using firebase 
+      // let au=arrayResult(snapshot.val())
+      // console.log(au);
+      // availableUsersset(au)
+
+      snapshot.forEach(function (data) {
+
+        let guest = data.val()
+        let ifEqualPass = guest[`password`] === user[`password`]
+        let ifEqualUsername = guest[`username`] === user[`username`]
+
+        if(ifEqualUsername&&ifEqualPass){
+
+          bake_cookie(`currentUser`, user[`username`])
+          isLoginset(true)
+          refreshPage()
+
+          return;
+        }else{
+          isLoginset(false)
+        }
+
+
+      });
+    });
+
+    // availableUsersset
+
+
 
     // returns array of all equal username and password
     // expect 1 item in array because
     // not two usernames shall be equal!
-    let searchForUsernameAndPassword
-      = availableUsers.filter(guest => guest[`username`] === user[`username`] && guest[`password`] === user[`password`])
+    // let searchForUsernameAndPassword
+    //   = availableUsers.filter(guest => guest[`username`] === user[`username`] && guest[`password`] === user[`password`])
 
-    if (searchForUsernameAndPassword.length > 0) {
-      bake_cookie(`currentUser`, user[`username`])
-      isLoginset(true)
-    } else {
-      isLoginset(false)
-    }
+    
   }
 
-  const refreshPage = ()=>{
+  const refreshPage = () => {
     window.location.reload();
- }
-
-  useEffect(() => {
-
-    if (isLogin) {
-      isLoginTextset(`You have successfully signed in.`)
-    } else {
-      isLoginTextset(`Not Signed In`)
-    }
-
-  }, [isLogin])
+  }
 
   return (
     <React.Fragment>
       <h1>Sign In Page</h1>
 
-
-{/* TODO: username and password can be reusable */}
-
       <Sign
-      usernameSet={username=>setuser(`username`,username)}
-      passwordSet={password=>setuser(`password`,password)}
+        usernameSet={username => setuser(`username`, username)}
+        passwordSet={password => setuser(`password`, password)}
       />
-      
-      {/* <Input hint={`Enter username`} retrieveValue={username => setuser(`username`, username)} />
-
-      <input
-        placeholder={`Enter password`}
-        onChange={e => setuser(`password`, e.target.value)}
-        type="password"
-      /> */}
 
 
       <Button name={`Submit`} submit={() => {
 
-canISignIn()
-refreshPage()
+        canISignIn()
+        // refreshPage()
       }} />
       {isLoginText}
 

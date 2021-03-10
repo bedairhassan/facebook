@@ -6,7 +6,7 @@ import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-ro
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import firebase from '../../firebase/firebase'
 
-const arrayResult = (rooms)=>{
+const arrayResult = (rooms) => {
     return Object.keys(rooms).map(room => {
         let q = rooms[room]
         return q
@@ -25,21 +25,39 @@ const NewsMain = () => {
             console.table()
             dataSet(sortByNewsFirst(arrayResult(snapshot.val())))
 
-    
+
             snapshot.forEach(function (data) {
             });
-          })
+        })
     }, [])
+
+    // todo: reusable, put it in its own file
+    function isEmpty(map) { // checks on empty array or empty object or empty string
+        for (var key in map) {
+            if (map.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     return (
         <React.Fragment>
-            <h1>News</h1>
-            <div className="row">
-                <div className="leftcolumn">
-                    {data.map(card => <Card card={card} />)}
-                    {/* <Card data={{ type: `news`, text: `hello everyone`, user: `user919` }}/> */}
-                </div>
-            </div>
+
+            {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
+
+                <React.Fragment>
+                    <h1>News</h1>
+                    <div className="row">
+                        <div className="leftcolumn">
+                            {data.map(card => <Card card={card} />)}
+                            {/* <Card data={{ type: `news`, text: `hello everyone`, user: `user919` }}/> */}
+                        </div>
+                    </div>
+                </React.Fragment>
+
+            }
+
         </React.Fragment>
     );
 };
