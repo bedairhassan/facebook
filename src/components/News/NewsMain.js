@@ -4,7 +4,14 @@ import './News.css';
 import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
+import firebase from '../../firebase/firebase'
 
+const arrayResult = (rooms)=>{
+    return Object.keys(rooms).map(room => {
+        let q = rooms[room]
+        return q
+    })
+};
 
 const NewsMain = () => {
 
@@ -13,23 +20,20 @@ const NewsMain = () => {
     // load from firebase then sort. 
     useEffect(() => {
 
-        let array=[
-            { type: `post`, text: `post4`, user: `whatever`, date: `9-1-2019` },
-            { type: `news`, text: `news1`, user: `mohammed`, date: `9-1-2020` },
-            { type: `news`, text: `news2`, user: `ali`, date: `9-1-2029` },
-            { type: `news`, text: `news3`, user: `user919`, date: `9-1-2029` },
-            { type: `post`, text: `post1`, user: `user919`, date: `9-1-2029` },
-            { type: `post`, text: `post2`, user: `user919`, date: `9-1-2029` },
-            { type: `post`, text: `post3`, user: `user919`, date: `9-1-2029` }
-        ]
-        let data = sortByNewsFirst(array)
-        // console.log('qaqdwdas', data)
-        dataSet(sortByNewsFirst(data))
+        firebase.database().ref('/news').on("value", function (snapshot) {
+            // console.log(snapshot.val());
+            console.table()
+            dataSet(sortByNewsFirst(arrayResult(snapshot.val())))
+
+    
+            snapshot.forEach(function (data) {
+            });
+          })
     }, [])
 
     return (
         <React.Fragment>
-            News
+            <h1>News</h1>
             <div className="row">
                 <div className="leftcolumn">
                     {data.map(card => <Card card={card} />)}

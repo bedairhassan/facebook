@@ -15,10 +15,10 @@ const Editing = () => {
 
     const [data, dataSet] = useState({
 
-        // // tmp 
-        nickname:"ads baddie2",
-        phone:"0qw122111",
-        email:"ha123122ssan@gmail.com"
+        // // // tmp 
+        // nickname:"ads baddie2",
+        // phone:"0qw122111",
+        // email:"ha123122ssan@gmail.com"
     })
 
     function easySet(attribute, value) {

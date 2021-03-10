@@ -127,13 +127,14 @@ function Environment() {
 
     let admins = [`admin`, `hassan`, `mohammed`, `ali`]
 
+    let types = [`news`,`post`]
 
     for (const admin of admins) {
       for (let i = 0; i < 5; i++) {
 
         let push = {
           date: new Date() + ``,
-          type: makeid(10),
+          type: types[Math.floor(Math.random() * 2)],
           text: makeid(10),
           user:admin
         }
@@ -148,16 +149,6 @@ function Environment() {
     }
 
 
-    // console.log('obj', obj)
-
-
-    // firebase.database().ref('/about').child('mohy').on("value", function (snapshot) {
-    //   console.log(snapshot.val());
-    //   snapshot.forEach(function (data) {
-    //     console.log(data.key);
-    //     // alert(data.key)
-    //   });
-    // });
   }
 
   return (
