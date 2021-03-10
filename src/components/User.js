@@ -7,17 +7,26 @@ import Table from '../reusable-components/Table'
 
 const User = () => {
 
-    const [user,userSet]=useState({})
+    const [user, userSet] = useState({})
 
-    function createUser(string){// extra
+    function createUser(string) {// extra
 
         let array = string.split(' ')
         let name = array[0]
         let phone = array[1]
         let email = array[2]
 
-        return{name,phone,email}
+        return { name, phone, email }
     }
+
+    function isEmpty(map) { // checks on empty array or empty object or empty string
+        for (var key in map) {
+          if (map.hasOwnProperty(key)) {
+            return false;
+          }
+        }
+        return true;
+      }
 
     useEffect(() => {
 
@@ -41,15 +50,28 @@ const User = () => {
         // console.log('filtered', filtered)
 
         // if(filtered.length>0){
-            // userSet(filtered[0])
+        // userSet(filtered[0])
         // }
 
     }, [])
 
     return (
+
+
         <div>
-            A user
+
+
+            {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
+
+                <React.Fragment>
+                    A user
             <Table user={user} />
+                </React.Fragment>
+
+            }
+
+
+
         </div>
     );
 };
