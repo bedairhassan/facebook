@@ -40,10 +40,7 @@ export default function Login() {
 
     firebase.database().ref('/availableUsers').on("value", function (snapshot) {
 
-      // TODO: query using firebase 
-      // let au=arrayResult(snapshot.val())
-      // console.log(au);
-      // availableUsersset(au)
+      
 
       snapshot.forEach(function (data) {
 
@@ -66,16 +63,6 @@ export default function Login() {
       });
     });
 
-    // availableUsersset
-
-
-
-    // returns array of all equal username and password
-    // expect 1 item in array because
-    // not two usernames shall be equal!
-    // let searchForUsernameAndPassword
-    //   = availableUsers.filter(guest => guest[`username`] === user[`username`] && guest[`password`] === user[`password`])
-
     
   }
 
@@ -93,7 +80,10 @@ export default function Login() {
       />
 
 
-      <Button name={`Submit`} submit={() => {
+      <Button 
+      
+      className="btn btn-success"
+      name={`Submit`} submit={() => {
 
         canISignIn()
         // refreshPage()

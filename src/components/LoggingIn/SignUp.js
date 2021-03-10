@@ -37,13 +37,11 @@ const Signup = () => {
         }
     }
 
-    useEffect(() => {
-
-    }, [submit])
 
 
     return (
         <div>
+            <h1>Sign Up Page</h1>
             <Sign
                 usernameSet={username => setuser(`username`, username)}
                 passwordSet={password => setuser(`password`, password)}
