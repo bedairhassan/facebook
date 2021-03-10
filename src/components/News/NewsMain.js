@@ -5,6 +5,7 @@ import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 import { Route, BrowserRouter as Router, Switch, Redirect, Link } from 'react-router-dom';
 import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import firebase from '../../firebase/firebase'
+import isEmpty from '../../tools/isEmpty'
 
 const arrayResult = (rooms) => {
     return Object.keys(rooms).map(room => {
@@ -12,6 +13,8 @@ const arrayResult = (rooms) => {
         return q
     })
 };
+
+
 
 const NewsMain = () => {
 
@@ -32,14 +35,7 @@ const NewsMain = () => {
     }, [])
 
     // todo: reusable, put it in its own file
-    function isEmpty(map) { // checks on empty array or empty object or empty string
-        for (var key in map) {
-            if (map.hasOwnProperty(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
+   
 
     return (
         <React.Fragment>

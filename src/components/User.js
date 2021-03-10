@@ -5,6 +5,8 @@ import firebase from '../firebase/firebase'
 // reusable
 import Table from '../reusable-components/Table'
 
+import isEmpty from '../tools/isEmpty'
+
 const User = () => {
 
     const [user, userSet] = useState({})
@@ -19,14 +21,7 @@ const User = () => {
         return { name, phone, email }
     }
 
-    function isEmpty(map) { // checks on empty array or empty object or empty string
-        for (var key in map) {
-            if (map.hasOwnProperty(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     useEffect(() => {
 

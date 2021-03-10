@@ -7,18 +7,15 @@ import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
+
+import isEmpty from '../../tools/isEmpty'
+
+
 const Login = () => {
 
     const [action, actionSet] = useState(`Sign In`)
 
-    function isEmpty(map) { // checks on empty array or empty object or empty string
-        for (var key in map) {
-            if (map.hasOwnProperty(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    
 
     return (
         <div>

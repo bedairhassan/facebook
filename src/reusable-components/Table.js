@@ -1,17 +1,11 @@
 import React from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
 
+import isEmpty from '../tools/isEmpty'
+
 const Table = ({ user }) => {
 
-    // separate file 
-    function isEmpty(map) {
-        for (var key in map) {
-            if (map.hasOwnProperty(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
+   
 
     const [isShow, isShowset] = useState(false)
 

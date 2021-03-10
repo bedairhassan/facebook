@@ -8,6 +8,7 @@ import { bake_cookie, read_cookie } from "sfcookies"
 // import firebaseSet from '../../firebase/firebase-tools/firebaseSet'
 import firebasePush from '../firebase/firebase-tools/firebasePush'
 
+import isEmpty from '../tools/isEmpty'
 
 export default function CreatePost() { // type,text
 
@@ -20,14 +21,6 @@ export default function CreatePost() { // type,text
     postset(tmp)
   }
 
-  function isEmpty(map) { // checks on empty array or empty object or empty string
-    for (var key in map) {
-      if (map.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  }
 
 
   function submit() {

@@ -21,19 +21,15 @@ import Table from './reusable-components/Table'
 import User from './components/User'
 import refreshPage from './tools/refreshPage'
 
+
+import isEmpty from './tools/isEmpty'
+
 // cookies
 // currentUser has currentUser `ali` : string
 
 function App() {
 
-  function isEmpty(map) { // checks on empty array or empty object or empty string
-    for (var key in map) {
-      if (map.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  }
+  
 
   return (
     <div className="App">

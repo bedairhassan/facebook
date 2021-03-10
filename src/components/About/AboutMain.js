@@ -3,6 +3,8 @@ import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 import firebase from '../../firebase/firebase'
 
+import isEmpty from '../../tools/isEmpty'
+
 // sub components
 import Editing from './Editing'
 import Plain from './Plain'
@@ -15,14 +17,7 @@ import editIconNO from '../../images/edit_32px_no.png'
 import DisplayIf from '../../reusable-components/DisplayIf'
 
 // todo:put isempty in separate file
-function isEmpty(map) { // checks on empty array or empty object or empty string
-  for (var key in map) {
-    if (map.hasOwnProperty(key)) {
-      return false;
-    }
-  }
-  return true;
-}
+
 
 export default function About() {
 
