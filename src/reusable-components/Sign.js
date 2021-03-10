@@ -2,10 +2,13 @@ import React from 'react';
 
 import Input from '../reusable-components/Input'
 
-const Sign = ({usernameSet,passwordSet}) => {
+const Sign = ({usernameSet,passwordSet,usernameId}) => {
     return (
         <div>
-            <Input hint={`Enter username`} retrieveValue={username => usernameSet(username)} />
+            <Input 
+            
+            id={usernameId}
+            hint={`Enter username`} retrieveValue={username => usernameSet(username)} />
 
 
 {/* I can make this reusable! */}

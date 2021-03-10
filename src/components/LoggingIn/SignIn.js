@@ -39,9 +39,6 @@ export default function Login() {
   function canISignIn() {
 
     firebase.database().ref('/availableUsers').on("value", function (snapshot) {
-
-      
-
       snapshot.forEach(function (data) {
 
         let guest = data.val()

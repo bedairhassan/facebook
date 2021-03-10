@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
 
+import firebase from "../../firebase/firebase"
+import firebaseSet from "../../firebase/firebase-tools/firebaseSet"
+
+
 import Sign from '../../reusable-components/Sign'
 
 const Signup = () => {
 
-    const [user, userset] = useState({}) // {} for object
-
-    const [submit, submitSet] = useState(false)
+    const [user, userset] = useState({}) // <input/>
 
     // function for setting value `user`
     function setuser(key, value) {
@@ -16,42 +18,66 @@ const Signup = () => {
         userset(tmp)
     }
 
-    const [availableUsers, availableUsersset] = useState([
-        { 'username': 'admin', 'password': 'hassan' }
-    ])
-    function canISignUp() {
-
-        // returns array of all equal username and password
-        // expect 1 item in array because
-        // not two usernames shall be equal!
-        let searchForUsernameAndPassword
-            = availableUsers.filter(guest => guest[`username`] === user[`username`] && guest[`password`] === user[`password`])
-
-        if (searchForUsernameAndPassword.length === 0) {
-            // bake_cookie(`currentUser`, user[`username`])
-            alert(`That is a new user`)
-            // isLoginset(true)
-        } else {
-            // isLoginset(false)
-            alert(`Not a new user`)
-        }
+    const refreshPage = () => {
+        window.location.reload();
     }
 
+    function canISignUp() {
+
+        let allowSignIn = false
+
+        firebase
+            .database()
+            .ref('/availableUsers')
+            .child(user[`username`])
+            .on("value", function (snapshot) {
+
+                if (!(snapshot.val() === null) && !allowSignIn) {
+                    document.getElementById('usernameRef').value = '';
+                    document.getElementById('passwordRef').value = '';
+                    alert(`Username already exists`)
+                } else {
+                    allowSignIn = true
+                }
+            })
+
+        if (allowSignIn) {
+
+            firebaseSet({
+                ref: `availableUsers`, child: user[`username`], set: {
+                    username: user[`username`],
+                    password: user[`password`]
+                }
+            })
+
+            alert(`Submitted`)
+            refreshPage()
+            allowSignIn = false
+        }
+    }
 
 
     return (
         <div>
             <h1>Sign Up Page</h1>
-            <Sign
-                usernameSet={username => setuser(`username`, username)}
-                passwordSet={password => setuser(`password`, password)}
-            />
-            <button
 
-                onClick={() => {
-                    submitSet(!submit)
-                    canISignUp()
-                }}
+
+            <input
+                id="usernameRef"
+                placeholder="Enter username"
+                onChange={e => setuser(`username`, e.target.value)} />
+            <br />
+
+            <input
+                type="password"
+                id="passwordRef"
+                placeholder="Enter password"
+                onChange={e => setuser(`password`, e.target.value)} />
+            <br />
+
+
+            <button
+                onClick={() => canISignUp()}
                 class="btn btn-success"
             >Submit</button>
         </div>
