@@ -19,13 +19,13 @@ import About from './components/About/AboutMain'
 import News from './components/News/NewsMain'
 import Table from './reusable-components/Table'
 import User from './components/User'
+import refreshPage from './tools/refreshPage'
 
 // cookies
 // currentUser has currentUser `ali` : string
 
 function App() {
 
-  const [signInStatus, signInStatusset] = useState(`not signed in yet`)
   function isEmpty(map) { // checks on empty array or empty object or empty string
     for (var key in map) {
       if (map.hasOwnProperty(key)) {
@@ -33,11 +33,6 @@ function App() {
       }
     }
     return true;
-  }
-
-
-  const refreshPage = () => {
-    window.location.reload();
   }
 
   return (
@@ -52,7 +47,7 @@ function App() {
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 
-          {signInStatus === `not signed in yet` ?
+          {isEmpty(read_cookie(`currentUser`)) ?
             <Link to="/login" class="nav-item nav-link px-3">Login |</Link> :
 
 
@@ -75,7 +70,7 @@ function App() {
           </a>
 
 
-          {signInStatus !== `not signed in yet` && <div
+          {!isEmpty(read_cookie(`currentUser`)) && <div
             onClick={() => {
               bake_cookie(`currentUser`, '')
               refreshPage()
