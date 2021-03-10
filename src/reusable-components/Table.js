@@ -33,7 +33,7 @@ const Table = ({ user }) => {
             {isShow&&<table>
             <tr>
                 <td>Name</td>
-                <td>{user.name}</td>
+                <td>{user.nickname}</td>
             </tr>
             <tr>
                 <td>Phone</td>

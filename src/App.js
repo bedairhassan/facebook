@@ -4,6 +4,8 @@ import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import firebase from '../src/firebase/firebase'
+import firebaseReceiveChild from '../src/firebase/firebase-tools/firebaseReceiveChild'
 
 // reusable
 import Input from '../src/reusable-components/Input'
@@ -44,26 +46,31 @@ function App() {
 
   }, read_cookie(`currentUser`))
 
-  const refreshPage = ()=>{
+  const refreshPage = () => {
     window.location.reload();
- }
+  }
 
   return (
     <div className="App">
+
+{/* <Environment /> */}
+
+
+
       <Router>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 
           {signInStatus === `not signed in yet` &&
-            <Link to="/login" class="nav-item nav-link px-3">Login |</Link> 
-            }
+            <Link to="/login" class="nav-item nav-link px-3">Login |</Link>
+          }
 
           <Link to="/About" class="nav-item nav-link px-3">About |</Link>
-        
-        <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
-        
-        <Link to="/News" class="nav-item nav-link px-3">News |</Link>
+
+          <Link to="/CreateNews" class="nav-item nav-link px-3">Create News |</Link>
+
+          <Link to="/News" class="nav-item nav-link px-3">News |</Link>
           <a class="nav-link disabled" href="#"> {signInStatus}</a>
 
 
@@ -98,8 +105,35 @@ function App() {
           </Route>
         </Switch>
       </Router>
+
     </div>
   );
+}
+
+function Environment() {
+
+  function submit() {
+
+    let obj = firebaseReceiveChild({ref:`/about`,child:'admin'})
+    // console.log('obj', obj)
+    setTimeout(function(){ console.log('obj', obj) }, 3000);
+    
+
+    // firebase.database().ref('/about').child('mohy').on("value", function (snapshot) {
+    //   console.log(snapshot.val());
+    //   snapshot.forEach(function (data) {
+    //     console.log(data.key);
+    //     // alert(data.key)
+    //   });
+    // });
+  }
+
+  return (
+    <React.Fragment>
+      <h1>TMP Environment</h1>
+      <button onClick={() => submit()}>Submit</button>
+    </React.Fragment>
+  )
 }
 
 export default App;

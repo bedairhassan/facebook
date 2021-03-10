@@ -1,6 +1,8 @@
 import React from 'react';
 import { useEffect,useState } from 'react/cjs/react.development';
 import Table from '../../reusable-components/Table'
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
+import firebase from '../../firebase/firebase'
 
 const Plain = () => {
 
@@ -8,7 +10,17 @@ const Plain = () => {
 
     useEffect(()=>{
 
+        let username = read_cookie(`currentUser`)
+
         // get value from firebase
+        firebase.database().ref('/about').child(username).on("value", function (snapshot) {
+        console.log(snapshot.val());
+
+        userSet(snapshot.val())
+
+        snapshot.forEach(function (data) {
+        });
+      });
 
     },[])
 

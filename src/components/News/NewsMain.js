@@ -22,7 +22,7 @@ const NewsMain = () => {
             { type: `post`, text: `post2`, user: `user919`, date: `9-1-2029` },
             { type: `post`, text: `post3`, user: `user919`, date: `9-1-2029` }
         ])
-        console.log('qaqdwdas', data)
+        // console.log('qaqdwdas', data)
         dataSet(sortByNewsFirst(data))
     }, [])
 
