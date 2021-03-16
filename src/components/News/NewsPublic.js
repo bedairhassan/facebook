@@ -23,11 +23,40 @@ const NewsPublic = () => {
         })
     }, [])
 
+    // user choooses whether it's "news" or "post"
+    const [choice, choiceSet] = useState()
+
+    useEffect(() => {
+        // alert(choice)
+    }, [choice])
+
+
+    // ES6 function 
+    const filterBy = (array, key) => array.filter(item => item[`type`] === key)
+
     return (
         <div>
-            <NewsMain data={data} optionalTitle={true}/>
+
+            <Choose returnChoice={value => choiceSet(value)} />
+
+            {{
+                'news': <NewsMain data={filterBy(data, 'news')} optionalTitle={true} />,
+                'post': <NewsMain data={filterBy(data, 'post')} optionalTitle={true} />
+            }[choice]}
+
         </div>
     );
 };
+
+function Choose({ returnChoice }) {
+
+    return (
+
+        <>
+            <h2 onClick={() => returnChoice('news')}>News</h2>
+            <h2 onClick={() => returnChoice('post')}>Posts</h2>
+        </>
+    )
+}
 
 export default NewsPublic;
