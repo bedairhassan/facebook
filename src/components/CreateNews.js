@@ -17,9 +17,9 @@ export default function CreatePost() { // type,text
 
   function setpost(key, value) { // can be reusable 
     
-    if(key===`type` && !(key in value)){ // if user didn't choose anything from dropdown menu
-      return;
-    }
+    // if(key===`type` && !(key in value)){ // if user didn't choose anything from dropdown menu
+    //   return;
+    // }
 
     const tmp = { ...post }
     tmp[key] = value
