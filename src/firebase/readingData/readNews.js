@@ -10,5 +10,4 @@ var promise = new Promise((resolve) => {
     })
 });
 
-
 export default promise
