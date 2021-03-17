@@ -10,6 +10,7 @@ import SignUp from './SignUp'
 
 import isEmpty from '../../tools/isEmpty'
 
+import '../../App.css'
 
 const Login = () => {
 
@@ -18,14 +19,13 @@ const Login = () => {
     
 
     return (
-        <div>
+        <div class="main" align="center">
 
             {
                 {
                     true:
 
                         <React.Fragment>
-                            <h1>Login Page</h1>
 
                             <Table
                                 fields={'Sign In,Sign Up'}

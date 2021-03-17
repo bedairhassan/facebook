@@ -7,41 +7,37 @@ import arrayResult from '../../tools/arrayResult'
 
 import NewsMain from './NewsMain'
 
+// import readAnnouncements from '../.....'
+import readNews from '../../firebase/readingData/readNews'
+
+import filterBy from '../../tools/filterBy'
+import CreateAnnouncement from '../CreateAnnouncement';
+
+import '../../../src/App.css'
+
 const NewsPublic = () => {
 
     const [data, dataSet] = useState([])
 
-    // load from firebase then sort. 
-    useEffect(() => {
-
-        firebase.database().ref('/news').on("value", function (snapshot) {
-
-            dataSet(sortByNewsFirst(arrayResult(snapshot.val())))
-
-            snapshot.forEach(function (data) { // data.val()
-            });
-        })
-    }, [])
+    useEffect(() =>
+        readNews.then(array => dataSet(sortByNewsFirst(array)))
+        , [])
 
     // user choooses whether it's "news" or "post"
     const [choice, choiceSet] = useState()
 
-    useEffect(() => {
-        // alert(choice)
-    }, [choice])
-
-
     // ES6 function 
-    const filterBy = (array, key) => array.filter(item => item[`type`] === key)
 
     return (
         <div>
 
             <Choose returnChoice={value => choiceSet(value)} />
 
+            <CreateAnnouncement />
+
             {{
-                'news': <NewsMain data={filterBy(data, 'news')} optionalTitle={true} />,
-                'post': <NewsMain data={filterBy(data, 'post')} optionalTitle={true} />
+                'news': <NewsMain data={filterBy(data, 'news')} />,
+                'post': <NewsMain data={filterBy(data, 'post')} />
             }[choice]}
 
         </div>
@@ -50,11 +46,35 @@ const NewsPublic = () => {
 
 function Choose({ returnChoice }) {
 
+    const style = {
+        listStyleType: "none",
+        margin: "0",
+        padding: "0"
+    }
+
     return (
 
         <>
-            <h2 onClick={() => returnChoice('news')}>News</h2>
-            <h2 onClick={() => returnChoice('post')}>Posts</h2>
+
+            <div class="main">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <ul
+                        class="navbar-nav mr-auto">
+                        <li
+                            class="nav-item"
+                            onClick={() => returnChoice('news')}>
+                            <a class="nav-link" >News </a>
+                        </li>
+                        <li
+                            class="nav-item"
+                            onClick={() => returnChoice('post')}
+                        >
+                            <a class="nav-link" >Post </a>
+
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </>
     )
 }

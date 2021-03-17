@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+
 var firebaseConfig = {
     apiKey: "AIzaSyB9WGsbghOWP-rBYqyNa5FoeHmowIjk-bo",
     authDomain: "test-server-875a8.firebaseapp.com",

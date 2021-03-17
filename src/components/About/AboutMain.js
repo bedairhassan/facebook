@@ -24,6 +24,9 @@ import NewsMain from '../News/NewsMain'
 
 import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 
+
+import '../../App.css'
+
 export default function About() {
 
   const [isEditing, isEditingset] = useState(false)
@@ -47,34 +50,36 @@ export default function About() {
   return (
     <React.Fragment>
 
+      <div class="main">
       {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
 
-        <React.Fragment>
-          <h1>About Page</h1>
+<React.Fragment>
+  <h1>About Page</h1>
 
-          <DisplayIf
-            yes={editIconYES}
-            no={editIconNO}
-            Trigger={() => isEditingset(!isEditing)}
-            condition={isEditing} />
+  <DisplayIf
+    yes={editIconYES}
+    no={editIconNO}
+    Trigger={() => isEditingset(!isEditing)}
+    condition={isEditing} />
 
-          {{
-            true: <div align="middle"><Editing /></div>,
-            false: <React.Fragment>
-
-
-              <div class="rightcolumn">              <Plain />
-              </div>
-
-              <div class="leftcolumn">              <NewsMain data={data} />
-              </div>
-            </React.Fragment>
-          }[isEditing]}
+  {{
+    true: <div align="middle"><Editing /></div>,
+    false: <React.Fragment>
 
 
-        </React.Fragment>
+      <div class="rightcolumn">              <Plain />
+      </div>
 
-      }
+      <div class="leftcolumn">              <NewsMain data={data} />
+      </div>
+    </React.Fragment>
+  }[isEditing]}
+
+
+</React.Fragment>
+
+}
+      </div>
 
 
 

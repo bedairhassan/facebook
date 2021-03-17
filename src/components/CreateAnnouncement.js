@@ -10,7 +10,7 @@ import firebasePush from '../firebase/firebase-tools/firebasePush'
 
 import isEmpty from '../tools/isEmpty'
 
-export default function CreatePost() { // type,text
+export default function CreateAnnouncement() { // type,text
 
   // type,text,date,user
   const [post, postset] = useState({})
