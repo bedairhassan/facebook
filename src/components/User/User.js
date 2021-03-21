@@ -16,6 +16,8 @@ import NewsMain from '../News/NewsMain'
 import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 import arrayResult from '../../tools/arrayResult'
 
+import isSignedIn from '../../tools/isSignedIn'
+
 const User = () => {
 
 
@@ -60,7 +62,7 @@ const User = () => {
         <React.Fragment>
 
 
-            {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
+            {!isSignedIn() ? `not signed in` :
 
                 <React.Fragment>
 

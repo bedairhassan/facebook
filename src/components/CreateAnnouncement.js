@@ -10,13 +10,15 @@ import firebasePush from '../firebase/firebase-tools/firebasePush'
 
 import isEmpty from '../tools/isEmpty'
 
+import isSignedIn from '../tools/isSignedIn'
+
 export default function CreateAnnouncement() { // type,text
 
   // type,text,date,user
   const [post, postset] = useState({})
 
   function setpost(key, value) { // can be reusable 
-    
+
     // if(key===`type` && !(key in value)){ // if user didn't choose anything from dropdown menu
     //   return;
     // }
@@ -60,7 +62,7 @@ export default function CreateAnnouncement() { // type,text
   return (
     <React.Fragment>
 
-      {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
+      {!isSignedIn() ? `not signed in` :
 
         <div align="middle">
           <h1>Create News</h1>
@@ -68,14 +70,14 @@ export default function CreateAnnouncement() { // type,text
 
           <tr>
             <td><Input
-                retrieveValue={text => setpost(`text`, text)}
-                hint={`Text`} /></td>
+              retrieveValue={text => setpost(`text`, text)}
+              hint={`Text`} /></td>
             <td><Select
-                retrieveValue={type => setpost(`type`, type)}
-                data={[`Choose`, `news`, `post`]} /></td>
+              retrieveValue={type => setpost(`type`, type)}
+              data={[`Choose`, `news`, `post`]} /></td>
             <td><button className="btn btn-danger" onClick={() => submit()}>Submit</button></td>
           </tr>
-          <br/>
+          <br />
 
         </div>
       }

@@ -27,6 +27,8 @@ import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 
 import '../../App.css'
 
+import isSignedIn from '../../tools/isSignedIn'
+
 export default function About() {
 
   const [isEditing, isEditingset] = useState(false)
@@ -51,7 +53,7 @@ export default function About() {
     <React.Fragment>
 
       <div class="main">
-      {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
+      {!isSignedIn() ? `not signed in` :
 
 <React.Fragment>
   <h1>About Page</h1>

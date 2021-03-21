@@ -15,6 +15,8 @@ import firebasePush from '../../firebase/firebase-tools/firebasePush'
 
 import '../../App.css'
 
+import isSignedIn from '../../tools/isSignedIn'
+
 const NewsMain = ({ data, optionalTitle }) => {
 
 
@@ -26,18 +28,18 @@ const NewsMain = ({ data, optionalTitle }) => {
         <React.Fragment>
 
             <div class="main">
-            {isEmpty(read_cookie(`currentUser`)) ? `not signed in` :
+                {!isSignedIn() ? `not signed in` :
 
-<React.Fragment>
-    {
-        optionalTitle && <h1>Announcements: News or Posts</h1>
-    }
-    <div >
-        {data.map(card => <Card card={card} />)}
-    </div>
-</React.Fragment>
+                    <React.Fragment>
+                        {
+                            optionalTitle && <h1>Announcements: News or Posts</h1>
+                        }
+                        <div >
+                            {data.map(card => <Card card={card} />)}
+                        </div>
+                    </React.Fragment>
 
-}
+                }
             </div>
 
         </React.Fragment>
@@ -73,7 +75,7 @@ function Card({ card }) {
 
                     }}>{card[`user`]}</Link>}
 
-                  
+
                 </p>
                 <p align="right">
                     <img src={likeButton} width="24px" />

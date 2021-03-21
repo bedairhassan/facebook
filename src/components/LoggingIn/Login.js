@@ -11,6 +11,7 @@ import SignUp from './SignUp'
 import isEmpty from '../../tools/isEmpty'
 
 import '../../App.css'
+import isSignedIn from '../../tools/isSignedIn';
 
 const Login = () => {
 
@@ -41,7 +42,7 @@ const Login = () => {
                         </React.Fragment>
                     ,
                     false: <h1>YOU ARE SIGNED IN</h1>
-                }[isEmpty(read_cookie(`currentUser`))] // if empty, signed out // if not empty, sign in 
+                }[!isSignedIn()] // if empty, signed out // if not empty, sign in 
             }
 
         </div>
