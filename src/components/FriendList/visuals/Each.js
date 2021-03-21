@@ -5,7 +5,7 @@ import { read_cookie } from 'sfcookies';
 import filterOut from '../JS/FilterOut'
 
 // JS // another component
-import decline from '../../FriendRequests/JS/decline'
+import decline from '../../FriendRequests/JS/friend-req/decline'
 
 const Each = ({item}) => {
     return (

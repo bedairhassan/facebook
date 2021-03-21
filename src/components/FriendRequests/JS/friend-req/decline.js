@@ -1,7 +1,8 @@
 
 
-import firebase from '../../../firebase/firebase'
-import refreshPage from '../../../tools/refreshPage';
+import firebase from '../../../../firebase/firebase'
+
+import refreshPage from '../../../../tools/refreshPage';
 
 const decline = (object) => {
 

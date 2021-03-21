@@ -5,8 +5,8 @@ import Header from './Header'
 
 
 // decline,accept
-import decline from '../JS/decline'
-import accept from '../JS/accept'
+import decline from '../JS/friend-req/decline'
+import accept from '../JS/friend-req/accept'
 
 const Table = ({ data }) => {
 

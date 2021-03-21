@@ -2,15 +2,16 @@ let data = [
     {context:'hassan,ali',state:'pending'},
     {context:'alaa,mohammed',state:'accepted'},
     {context:'hassan,mustafa',state:'accepted'},
-    {context:'hassan,michael',state:'accepted'},
+    {context:'hassan,michael',state:'pending'},
     {context:'hassan,joseph',state:'pending'},
 ]
 
 // friend1: source
-let AreWeFriends = (data,friend1,friend2)=>{
+let AreWePending = (data,friend1,friend2)=>{
 
     // 1st filter: filter by accepted
-    data = data.filter(it=>it.state===`accepted`)
+    data = data.filter(it=>it.state===`pending`)
+    console.log('data', data)
 
     // 2nd filter: gather me and all my friends
     // if 2nd filter gets commented, I WON'T appear in list.
@@ -26,5 +27,5 @@ let AreWeFriends = (data,friend1,friend2)=>{
     console.log(data)
 }
 
-AreWeFriends(data,'hassan','michael')
+AreWePending(data,'hassan','michael')
 

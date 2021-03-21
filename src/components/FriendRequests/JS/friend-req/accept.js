@@ -1,6 +1,7 @@
-import refreshPage from "../../../tools/refreshPage"
+import refreshPage from '../../../../tools/refreshPage';
 
-import firebaseSet from '../../../firebase/firebase-tools/firebaseSet'
+
+import firebaseSet from '../../../../firebase/firebase-tools/firebaseSet'
 
 const accept = (object)=>{
 

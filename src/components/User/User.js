@@ -13,6 +13,8 @@ import '../News/News.css'
 import NewsMain from '../News/NewsMain'
 
 
+import RWeFriends from './RWeFriends/Main'
+
 import { sortByNewsFirst } from '../../CONSOLE/sortDataBasedonType'
 import arrayResult from '../../tools/arrayResult'
 
@@ -68,16 +70,16 @@ const User = () => {
 
                     <h1 class="header">You visited {read_cookie(`usertoDisplay`)}</h1>
 
+                    <RWeFriends />
+
                     <div class="body">
-                    <div class="rightcolumn">
-                        <Table user={user} />
-                    </div>
+                        <div class="rightcolumn">
+                            <Table user={user} />
+                        </div>
 
-
-
-                    <div class="leftcolumn">
-                        <NewsMain data={data} />
-                    </div>
+                        <div class="leftcolumn">
+                            <NewsMain data={data} />
+                        </div>
                     </div>
 
                 </React.Fragment>
