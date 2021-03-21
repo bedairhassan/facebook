@@ -10,6 +10,7 @@ const SideBar = ({isSignedIn}) => {
                 <React.Fragment>
                     {Links['about']}
                     {Links['news']}
+                    {Links['friendrequests']}
                 </React.Fragment>}
             {!isSignedIn && Links['login']}
 
