@@ -8,6 +8,7 @@ import About from '../../components/About/AboutMain'
 import News from '../../components/News/NewsPublic'
 import User from '../../components/User/User'
 import FriendReq from '../../components/FriendRequests/FriendReq'
+import FriendList from '../../components/FriendList/FList'
 
 const Routing = () => {
     return (
@@ -18,6 +19,7 @@ const Routing = () => {
                 <Route exact path="/About"><About /></Route>
                 <Route exact path="/user"><User /></Route>
                 <Route exact path="/fr"><FriendReq /></Route>
+                <Route exact path="/fl"><FriendList /></Route>
             </Switch>
         </div>
     );
