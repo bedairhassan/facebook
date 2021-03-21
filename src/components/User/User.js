@@ -59,7 +59,7 @@ const User = () => {
     return (
 
 
-        <React.Fragment>
+        <div class="main">
 
 
             {!isSignedIn() ? `not signed in` :
@@ -86,7 +86,7 @@ const User = () => {
 
 
 
-        </React.Fragment>
+        </div>
     );
 };
 

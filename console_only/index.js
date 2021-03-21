@@ -1,16 +1,30 @@
-// parameters
-let source = "hassan,ali"
-let target = "ali"
+let data = [
+    {context:'hassan,ali',state:'pending'},
+    {context:'alaa,mohammed',state:'accepted'},
+    {context:'hassan,mustafa',state:'accepted'},
+    {context:'hassan,michael',state:'accepted'},
+    {context:'hassan,joseph',state:'pending'},
+]
 
-// function
-let filterOut = (source,target)=>{
+// friend1: source
+let AreWeFriends = (data,friend1,friend2)=>{
 
-    let array = source.split(',')
+    // 1st filter: filter by accepted
+    data = data.filter(it=>it.state===`accepted`)
 
-    let filtered = array.filter(item=>item!==target)
+    // 2nd filter: gather me and all my friends
+    // if 2nd filter gets commented, I WON'T appear in list.
+    // why? see 1,2,3
+    // 1. if current user is hassan
+    // 2. and user to search is ali 
+    // 3. 3rd filter can either acquire [CORRECT] hassan,ali or [X] mustafa,ali
+    data = data.filter(it=>it.context.includes(friend1) || it.context.includes(friend2))
 
-    return filtered[0]
+    // 3rd filter: filter out this exact friend!
+    data = data.filter(it=>it.context.includes(friend2))
+
+    console.log(data)
 }
 
-let result = filterOut(source,target)
-console.log('result', result)
+AreWeFriends(data,'hassan','michael')
+

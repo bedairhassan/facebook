@@ -15,11 +15,12 @@ import isSignedIn from '../tools/isSignedIn'
 export default function CreateAnnouncement() { // type,text
 
   // type,text,date,user
-  const [post, postset] = useState({})
+  const [post, postset] = useState({type:`Choose`})
 
   function setpost(key, value) { // can be reusable 
 
-    // if(key===`type` && !(key in value)){ // if user didn't choose anything from dropdown menu
+    // if(key===`type` && (post[`type`]===`Choose`)){ // if user didn't choose anything from dropdown menu
+    // alert(`please choose`)
     //   return;
     // }
 
@@ -66,7 +67,6 @@ export default function CreateAnnouncement() { // type,text
 
         <div align="middle">
           <h1>Create News</h1>
-
 
           <tr>
             <td><Input
