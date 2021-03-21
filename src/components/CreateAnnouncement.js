@@ -65,23 +65,17 @@ export default function CreateAnnouncement() { // type,text
         <div align="middle">
           <h1>Create News</h1>
 
-          <table>
-            <RowCell // {Row,Name}
-              Row={<Input
+
+          <tr>
+            <td><Input
                 retrieveValue={text => setpost(`text`, text)}
-                hint={`Text`} />}
-              Name={`Enter Text For Post`}
-            />
-
-            <RowCell //{Row,Name}
-              Row={<Select
+                hint={`Text`} /></td>
+            <td><Select
                 retrieveValue={type => setpost(`type`, type)}
-                data={[`Choose`, `news`, `post`]} />}
-              Name={`Enter Type of Post`}
-            />
-          </table>
-
-          <button className="btn btn-danger" onClick={() => submit()}>Submit</button>
+                data={[`Choose`, `news`, `post`]} /></td>
+            <td><button className="btn btn-danger" onClick={() => submit()}>Submit</button></td>
+          </tr>
+          <br/>
 
         </div>
       }
