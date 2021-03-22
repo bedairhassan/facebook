@@ -35,7 +35,7 @@ const Messaging = () => {
 
         {/* You are speaking to              {scope!==undefined && scopeDisplay} */}
 
-        {/* <SendMessage child={scope}/> */}
+        <SendMessage child={scope}/>
 
             {(displayChat && data.length > 0) && data.map(item => <Each item={item} />)}
         </div>
@@ -50,7 +50,13 @@ const SendMessage = ({child})=>{
     function send(){
 
         let ref = 'message'
-        let push = message
+
+        let push={
+            child,
+            context:message,
+            date:`${new Date()} `,
+            whoSend:read_cookie('currentUser')
+        }
 
         firebasePush({ref,child,push})
     }
@@ -71,8 +77,9 @@ const Each = ({ item }) => {
 
     return (
         <div class="main" align={isThisMe ? `right` : `left`}>
-            <h1>{context}</h1>
-            <h2>{date}</h2>
+            {!isThisMe && <h2>{whoSend} says</h2>}
+            <h2>{context}</h2>
+            <h3>{date}</h3>
         </div>
     )
 }
