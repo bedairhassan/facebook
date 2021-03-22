@@ -12,7 +12,7 @@ import Routing from './components/App/Routing'
 import NavBar from './components/App/NavBar'
 import isSignedIn from './tools/isSignedIn'
 
-// Monday meeting. // just staged `major checkpoint` before any edits
+// Before Monday meeting. // just staged `before disaster` before any edits
 
 function App() {
   return (
