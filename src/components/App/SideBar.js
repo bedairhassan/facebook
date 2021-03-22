@@ -46,8 +46,8 @@ const SideBar = ({ isSignedIn }) => {
                         }
                     </h5></Link>
 
-
                     {Links['friendlist']}
+                    {Links['MessagesList']}
                 </React.Fragment>}
             {!isSignedIn && Links['login']}
 

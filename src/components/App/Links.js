@@ -8,7 +8,10 @@ const Links = {
     'news': <Link to="/News" class="nav-item nav-link px-3"><h5>Announcements</h5> </Link>,
     'signout': <Link to="/login" class="nav-item nav-link px-3">Sign Out</Link>,
     'friendrequests': <Link to="/fr" class="nav-item nav-link px-3"><h5>Friend Requests</h5></Link>,
-    'friendlist': <Link to="/fl" class="nav-item nav-link px-3"><h5>Friend List</h5></Link>
+    'friendlist': <Link to="/fl" class="nav-item nav-link px-3"><h5>Friend List</h5></Link>, 'MessagesList': <Link to="/ml" class="nav-item nav-link px-3"><h5>Messages List</h5></Link>
+
+
+    
 }
 
 export default Links

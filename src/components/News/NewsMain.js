@@ -47,28 +47,28 @@ const NewsMain = ({ data, optionalTitle }) => {
     );
 };
 
-function IsILikedPostBefore(array,user=read_cookie('currentUser')){
+function IsILikedPostBefore(array, user = read_cookie('currentUser')) {
 
-    return array.filter(person=>person===user)[0]!==undefined
+    return array.filter(person => person === user)[0] !== undefined
 }
 
-function Push(card){
+function Push(card) {
 
     console.log(card[`likes`])
 
-    if(!IsILikedPostBefore(arrayResult(card.likes))){
+    if (!IsILikedPostBefore(arrayResult(card.likes))) {
 
-        let likes = {...card[`likes`]}
+        let likes = { ...card[`likes`] }
         let user = read_cookie('currentUser')
-        likes[user]=user
+        likes[user] = user
 
         let ref = 'announcements' // 
         let child = card.child
         // let set = {...card,likes:{...card[`likes`],object}}
-        let set = {...card,likes}
+        let set = { ...card, likes }
 
-        firebaseSet({ref,child,set})
-    }else{
+        firebaseSet({ ref, child, set })
+    } else {
 
         alert(`You already liked it`)
     }
@@ -81,10 +81,10 @@ function Card({ card }) {
     const [YOU, YOUset]
         = useState(card[`user`] === read_cookie(`currentUser`))
 
-console.log(arrayResult(card[`likes`]))
+    console.log(arrayResult(card[`likes`]))
     const likes = arrayResult(card[`likes`]).length
 
-    console.log(IsILikedPostBefore(arrayResult(card[`likes`]),'hassan'))
+    console.log(IsILikedPostBefore(arrayResult(card[`likes`]), 'hassan'))
 
     // console.log(arrayResult(card[`likes`]))
 
