@@ -8,7 +8,7 @@ import arrayResult from '../../tools/arrayResult'
 import NewsMain from './NewsMain'
 
 // import readAnnouncements from '../.....'
-import readNews from '../../firebase/readingData/readNews'
+import readAnn from '../../firebase/readingData/readAnn'
 
 import filterBy from '../../tools/filterBy'
 import CreateAnnouncement from '../CreateAnnouncement';
@@ -20,7 +20,7 @@ const NewsPublic = () => {
     const [data, dataSet] = useState([])
 
     useEffect(() =>
-        readNews.then(array => dataSet(sortByNewsFirst(array)))
+        readAnn.then(array => dataSet(sortByNewsFirst(array)))
         , [])
 
     // user choooses whether it's "news" or "post"

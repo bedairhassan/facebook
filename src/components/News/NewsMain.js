@@ -16,6 +16,7 @@ import firebasePush from '../../firebase/firebase-tools/firebasePush'
 import '../../App.css'
 
 import isSignedIn from '../../tools/isSignedIn'
+import firebaseSet from '../../firebase/firebase-tools/firebaseSet';
 
 const NewsMain = ({ data, optionalTitle }) => {
 
@@ -46,12 +47,44 @@ const NewsMain = ({ data, optionalTitle }) => {
     );
 };
 
+function IsILikedPostBefore(array,user=read_cookie('currentUser')){
+
+    return array.filter(person=>person===user)[0]!==undefined
+}
+
+function Push(card){
+
+    console.log(card[`likes`])
+
+    if(!IsILikedPostBefore(arrayResult(card.likes))){
+
+        let likes = {...card[`likes`]}
+        let user = read_cookie('currentUser')
+        likes[user]=user
+
+        let ref = 'announcements' // 
+        let child = card.child
+        // let set = {...card,likes:{...card[`likes`],object}}
+        let set = {...card,likes}
+
+        firebaseSet({ref,child,set})
+    }else{
+
+        alert(`You already liked it`)
+    }
+}
+
 function Card({ card }) {
 
     const NewsPaper = card[`type`] === `news` && <sub>📰</sub>
 
     const [YOU, YOUset]
         = useState(card[`user`] === read_cookie(`currentUser`))
+
+console.log(arrayResult(card[`likes`]))
+    const likes = arrayResult(card[`likes`]).length
+
+    console.log(IsILikedPostBefore(arrayResult(card[`likes`]),'hassan'))
 
     // console.log(arrayResult(card[`likes`]))
 
@@ -78,8 +111,16 @@ function Card({ card }) {
 
                 </p>
                 <p align="right">
-                    <img src={likeButton} width="24px" />
-                    {/* {arrayResult(card[`likes`]).length >1 } */}
+                    <img
+                        onClick={() => Push(card)}
+
+                        src={likeButton} width="24px" />
+                    {likes > 0 && <span
+
+                        class="badge">{likes}</span>}
+
+                    {/* /news  */}
+                    {/* {date,text,type,user,likes} */}
                 </p>
             </div>
         </React.Fragment>

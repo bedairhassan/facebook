@@ -40,11 +40,12 @@ export default function About() {
   // load from firebase then sort. 
   useEffect(() => {
 
-    firebase.database().ref('/news').on("value", function (snapshot) {
+    firebase.database().ref('/announcements').on("value", function (snapshot) {
 
       let ARRAY = arrayResult(snapshot.val()).filter(item => read_cookie(`currentUser`) === item[`user`])
+      console.log('ARRAY', ARRAY)
 
-      dataSet(sortByNewsFirst(ARRAY))
+      dataSet(ARRAY)
 
     })
   }, [])
@@ -53,34 +54,36 @@ export default function About() {
     <React.Fragment>
 
       <div class="main">
-      {!isSignedIn() ? `not signed in` :
+        {!isSignedIn() ? `not signed in` :
 
-<React.Fragment>
-  <h1>About Page</h1>
+          <React.Fragment>
+            <h1>About Page</h1>
 
-  <DisplayIf
-    yes={editIconYES}
-    no={editIconNO}
-    Trigger={() => isEditingset(!isEditing)}
-    condition={isEditing} />
+            <DisplayIf
+              yes={editIconYES}
+              no={editIconNO}
+              Trigger={() => isEditingset(!isEditing)}
+              condition={isEditing} />
 
-  {{
-    true: <div align="middle"><Editing /></div>,
-    false: <React.Fragment>
-
-
-      <div class="rightcolumn">              <Plain />
-      </div>
-
-      <div class="leftcolumn">              <NewsMain data={data} />
-      </div>
-    </React.Fragment>
-  }[isEditing]}
+            {{
+              true: <div align="middle"><Editing /></div>,
+              false: <React.Fragment>
 
 
-</React.Fragment>
+                <div class="rightcolumn">              <Plain />
+                </div>
 
-}
+                <div class="leftcolumn">              {
+                  data.length > 0 && <NewsMain data={data} />
+                }
+                </div>
+              </React.Fragment>
+            }[isEditing]}
+
+
+          </React.Fragment>
+
+        }
       </div>
 
 

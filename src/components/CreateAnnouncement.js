@@ -49,7 +49,7 @@ export default function CreateAnnouncement() { // type,text
 
     // firebase: the `topost` variable to `posts`
     firebasePush({
-      ref: 'news',
+      ref: 'announcements',
       push: topost
     })
 

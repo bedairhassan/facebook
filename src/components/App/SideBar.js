@@ -10,12 +10,22 @@ import FriendRCount from './FriendRCount'
 import readFRNoti from '../../firebase/readingData/readFRNoti'
 
 import bell from '../../images/bell.png'
+import { read_cookie } from 'sfcookies';
 
 const SideBar = ({ isSignedIn }) => {
 
+    // place at promise to save some lines
+    const filter = (data)=>{
+
+        // context: mustafa,{hassan} :: 2nd one is the dude who receives friend request
+        data=data.filter(item=>item.context.split(',')[1]===read_cookie('currentUser'))
+
+        return data
+    }
+
     // friend request count
     const [count, countSet] = useState()
-    useEffect(() => readFRNoti.then(data => countSet(data.length)), [])
+    useEffect(() => readFRNoti.then(data => countSet(filter(data).length)), [])
 
 
     return (
