@@ -64,7 +64,7 @@ const SendMessage = ({child})=>{
     return (
         <tr>
             <td><input onChange={e=>messageSet(e.target.value)}/></td>
-            <td><button onClick={()=>send()}>Send Message</button></td>
+            <td><button onClick={()=>send()} class="btn btn-success">Send Message</button></td>
         </tr>
     )
 }

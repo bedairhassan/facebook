@@ -36,7 +36,7 @@ const NewsMain = ({ data, optionalTitle }) => {
                             optionalTitle && <h1>Announcements: News or Posts</h1>
                         }
                         <div >
-                            {data.map(card => <Card card={card} />)}
+                            {data.length > 0 && data.map(card => <Card card={card} />)}
                         </div>
                     </React.Fragment>
 
@@ -54,7 +54,7 @@ function IsILikedPostBefore(array, user = read_cookie('currentUser')) {
 
 function Push(card) {
 
-    console.log(card[`likes`])
+    // console.log(card[`likes`])
 
     if (!IsILikedPostBefore(arrayResult(card.likes))) {
 
@@ -76,15 +76,26 @@ function Push(card) {
 
 function Card({ card }) {
 
+    console.log(card)
+
     const NewsPaper = card[`type`] === `news` && <sub>📰</sub>
 
     const [YOU, YOUset]
         = useState(card[`user`] === read_cookie(`currentUser`))
 
-    console.log(arrayResult(card[`likes`]))
-    const likes = arrayResult(card[`likes`]).length
 
-    console.log(IsILikedPostBefore(arrayResult(card[`likes`]), 'hassan'))
+    let ref = arrayResult(card[`likes`]) || null 
+
+    let likes;
+
+    let allowDisplay = false
+
+    if (ref !== undefined) {
+        likes = arrayResult(card[`likes`]).length
+        allowDisplay = true
+    }
+
+    // console.log(IsILikedPostBefore(arrayResult(card[`likes`]), 'hassan'))
 
     // console.log(arrayResult(card[`likes`]))
 
@@ -115,9 +126,10 @@ function Card({ card }) {
                         onClick={() => Push(card)}
 
                         src={likeButton} width="24px" />
-                    {likes > 0 && <span
 
-                        class="badge">{likes}</span>}
+                    {allowDisplay && (likes > 0 && <span
+
+                        class="badge">{likes-1}</span>)}
 
                     {/* /news  */}
                     {/* {date,text,type,user,likes} */}
